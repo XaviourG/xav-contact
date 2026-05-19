@@ -268,16 +268,17 @@
     <h1>Xaviour D Greenhalgh</h1>
     <p class="tagline">Director @ Vectorise</p>
     <div class="actions">
-      <!-- No `download` attribute on purpose: iOS Safari (13+) honours it and
-           routes the file straight to Files, bypassing the inline Contacts
-           preview. Without it, iOS hands the .vcf to its system handler which
-           pops the "Create New Contact" sheet. Desktop browsers fall back to
-           a regular download based on the .vcf extension and MIME. -->
-      <a href="xaviour.vcf" type="text/vcard" class="btn btn-primary" aria-label="Add to contacts">
+      <!-- On iOS 16+ a JS handler upgrades this to navigator.share() with the
+           vCard as a File, which triggers the native iOS share sheet and its
+           first-class "Save to Contacts" action — the only technique that
+           bypasses Safari's silent download of .vcf to Files. The anchor itself
+           is the fallback for browsers without the Web Share API File support
+           (desktop, older iOS, Android Firefox). -->
+      <a href="xaviour.vcf" type="text/vcard" id="add-contact-btn" class="btn btn-primary" aria-label="Add to contacts">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
         Add Contact
       </a>
-      <p class="hint">On iPhone: scroll to the bottom of the preview and tap <strong>Create New Contact</strong>.</p>
+      <p class="hint">iPhone: a share sheet will open — tap <strong>Save to Contacts</strong>.</p>
     </div>
   </section>
 
@@ -323,6 +324,45 @@
     <a href="https://vectoriselabs.com" target="_blank" rel="noopener">VECTORISELABS.COM</a>
   </footer>
 </main>
+
+<script type="text/javascript">
+  /* Add Contact button — progressive enhancement for iOS.
+     iOS Safari (any version) silently saves .vcf links to Files and never shows
+     the Contacts preview. The Web Share API Level 2 (iOS 16+) is the only path
+     that surfaces a "Save to Contacts" action — calling navigator.share() with
+     the vCard as a File opens the native iOS share sheet, which lists Contacts
+     as a first-class target.
+     If the API isn't available (older iOS, most desktops) the anchor's default
+     href="xaviour.vcf" navigation runs unchanged. */
+  (function () {
+    const btn = document.getElementById("add-contact-btn");
+    if (!btn || !navigator.canShare) return;
+
+    btn.addEventListener("click", async function (e) {
+      let file;
+      try {
+        const res = await fetch("xaviour.vcf");
+        if (!res.ok) return;  // fall back to native navigation
+        const blob = await res.blob();
+        file = new File([blob], "xaviour.vcf", { type: "text/vcard" });
+      } catch (err) {
+        return;  // fetch failed — fall back to native navigation
+      }
+      if (!navigator.canShare({ files: [file] })) return;
+
+      e.preventDefault();
+      try {
+        await navigator.share({ files: [file] });
+      } catch (err) {
+        // User cancelled the share sheet, or share itself threw.
+        // AbortError = cancelled, do nothing. Other errors: fall back.
+        if (err && err.name !== "AbortError") {
+          window.location.href = "xaviour.vcf";
+        }
+      }
+    });
+  })();
+</script>
 
 <script type="text/javascript">
   /* Cal embed — exact replication of the company-site pattern:

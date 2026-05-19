@@ -28,29 +28,29 @@ Contact values live in **two** places — keep them in sync:
    any text editor and run:
    `perl -i -pe 's/\r?\n/\r\n/g' xaviour.vcf`
 
-### Why a static .vcf and no `download` attribute on iOS
+### How the Add Contact button works across platforms
 
-A JS-generated vCard from a `blob:` URL doesn't work on iPhone — iOS
-Safari either ignores it or, for the cases where it does fire, drops the
-file in Files with no Contacts handoff. A static `.vcf` served from the
-site root is the only thing iOS recognises reliably.
+| Environment | Path taken | UX |
+|---|---|---|
+| iOS Safari 16+ | JS upgrades the click to `navigator.share({ files: [vcf] })` | Native iOS share sheet opens with **Save to Contacts** as a first-class option |
+| Android Chrome | Same `navigator.share()` path (Web Share API Level 2 supported) | Native Android share sheet → Contacts |
+| Desktop / older iOS / unsupported browsers | Anchor's `href="xaviour.vcf"` runs unchanged | Browser downloads the file; user opens it → OS Contacts preview |
 
-The anchor deliberately **omits** the `download` attribute. iOS Safari
-13+ honours `download` by routing the file straight into the Files app,
-which skips the inline Contacts preview. Without `download`, iOS hands
-the `.vcf` to its system handler, which slides up the contact preview
-sheet. The user then scrolls and taps **Create New Contact** to save.
+The single static `xaviour.vcf` file is the source of truth for both
+paths — `navigator.share()` fetches it back as a `File` rather than
+reconstructing the vCard string in JS, so edits to `xaviour.vcf` flow
+through to both.
 
-Desktop browsers still trigger a normal file download from the same link
-(Chrome/Firefox use the `.vcf` extension + `text/x-vcard` MIME to decide).
-The user opens the downloaded file and the OS shows the Contacts preview.
+### Why this is the only thing that works on iOS
 
-Two iOS UX quirks that no web technique can fix (Apple-imposed):
-1. The top-right button is labelled **Done**, not **Save**, and does not
-   save. Tapping it just dismisses the sheet.
-2. The actual save action sits at the *bottom* of the sheet and requires
-   a scroll. The page includes a one-line hint under the button to keep
-   users from missing it.
+iOS Safari has no "Ask each time" download prompt (unlike macOS Safari).
+For `.vcf` links it routes the file straight to **Files → Downloads**
+regardless of `download` attribute, MIME type, or anchor structure.
+This is by design from Apple and there's no HTML/header trick that
+overrides it. The Web Share API File flow is the documented escape
+hatch: by handing iOS a `File` object explicitly, the share sheet
+surfaces app intents (including Contacts) instead of treating it as a
+generic download.
 
 ### Cal embed
 
