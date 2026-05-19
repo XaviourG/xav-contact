@@ -101,6 +101,19 @@
   }
   .header-card .actions { margin-top: 24px; }
 
+  .hint {
+    margin: 12px 0 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--muted-strong);
+    text-align: center;
+  }
+  .hint strong {
+    color: var(--muted);
+    font-weight: 500;
+  }
+
   .btn {
     display: inline-flex;
     align-items: center;
@@ -255,15 +268,16 @@
     <h1>Xaviour D Greenhalgh</h1>
     <p class="tagline">Director @ Vectorise</p>
     <div class="actions">
-      <!-- iOS Safari ignores the download attribute and instead opens the .vcf
-           inline, which is exactly what we want: it shows the Contacts preview
-           and an "Add to Contacts" button. Desktop browsers honour download and
-           save the file. Both routes need a real HTTP URL — a Blob/data URL
-           would not trigger the iOS preview. -->
-      <a href="xaviour.vcf" download="xaviour-greenhalgh.vcf" class="btn btn-primary" aria-label="Add to contacts">
+      <!-- No `download` attribute on purpose: iOS Safari (13+) honours it and
+           routes the file straight to Files, bypassing the inline Contacts
+           preview. Without it, iOS hands the .vcf to its system handler which
+           pops the "Create New Contact" sheet. Desktop browsers fall back to
+           a regular download based on the .vcf extension and MIME. -->
+      <a href="xaviour.vcf" type="text/vcard" class="btn btn-primary" aria-label="Add to contacts">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
         Add Contact
       </a>
+      <p class="hint">On iPhone: scroll to the bottom of the preview and tap <strong>Create New Contact</strong>.</p>
     </div>
   </section>
 
