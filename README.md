@@ -9,6 +9,7 @@ Live URL after deploy: **https://xaviourg.github.io/xav-contact**
 
 ```
 index.html     The whole site: HTML + inline CSS + tiny inline JS
+xaviour.vcf    Static vCard file the "Add Contact" button links to
 favicon.svg    "X" mark
 .nojekyll      Tells GitHub Pages to serve files verbatim (no Jekyll)
 README.md      This file
@@ -16,10 +17,24 @@ README.md      This file
 
 ## Edit your details
 
-All contact values live in one `CONTACT` block near the top of `<body>` in
-`index.html`. Change values there; the page, the vCard download, and the
-Cal embed all read from it. Phone numbers are E.164 (e.g. `+61416612608`);
-`whatsapp` omits the leading `+` for the `wa.me/` URL.
+Contact values live in **two** places — keep them in sync:
+
+1. **`index.html`** — the `CONTACT` object at the top of `<body>` drives
+   what the page displays and what the Cal embed loads. Phone numbers are
+   E.164 (e.g. `+61416612608`); `whatsapp` omits the leading `+` for the
+   `wa.me/` URL.
+2. **`xaviour.vcf`** — the file the "Add Contact" button downloads. Plain
+   vCard 3.0; uses CRLF line endings. To regenerate after edits, save in
+   any text editor and run:
+   `perl -i -pe 's/\r?\n/\r\n/g' xaviour.vcf`
+
+### Why a static .vcf instead of generating it in JS?
+
+iOS Safari ignores the `<a download>` attribute and won't navigate to
+`blob:` URLs as downloads, so a JS-generated vCard does nothing on iPhone.
+A static `.vcf` linked from `<a href>` works because iOS reads the file
+extension and opens its Contacts preview directly. Desktop browsers
+honour the `download` attribute and save the file as `xaviour-greenhalgh.vcf`.
 
 ### Cal embed
 

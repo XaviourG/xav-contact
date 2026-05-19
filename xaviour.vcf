@@ -1,0 +1,17 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Greenhalgh;Xaviour;D;;
+FN:Xaviour D Greenhalgh
+ORG:Vectorise
+TITLE:Director
+TEL;TYPE=CELL,VOICE,pref:+61416612608
+EMAIL;TYPE=INTERNET,pref:xaviourgreenhalgh@gmail.com
+item1.URL:https://linkedin.com/in/xaviourg
+item1.X-ABLabel:LinkedIn
+item2.URL:https://t.me/xaviourg
+item2.X-ABLabel:Telegram
+item3.URL:https://wa.me/61416612608
+item3.X-ABLabel:WhatsApp
+item4.URL:https://app.cal.eu/vectoriselabs
+item4.X-ABLabel:Cal.com
+END:VCARD

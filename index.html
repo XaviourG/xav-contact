@@ -255,7 +255,12 @@
     <h1>Xaviour D Greenhalgh</h1>
     <p class="tagline">Director @ Vectorise</p>
     <div class="actions">
-      <a id="save-vcard" href="#" class="btn btn-primary" aria-label="Add to contacts">
+      <!-- iOS Safari ignores the download attribute and instead opens the .vcf
+           inline, which is exactly what we want: it shows the Contacts preview
+           and an "Add to Contacts" button. Desktop browsers honour download and
+           save the file. Both routes need a real HTTP URL — a Blob/data URL
+           would not trigger the iOS preview. -->
+      <a href="xaviour.vcf" download="xaviour-greenhalgh.vcf" class="btn btn-primary" aria-label="Add to contacts">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
         Add Contact
       </a>
@@ -304,39 +309,6 @@
     <a href="https://vectoriselabs.com" target="_blank" rel="noopener">VECTORISELABS.COM</a>
   </footer>
 </main>
-
-<script>
-  /* vCard download */
-  document.getElementById("save-vcard").addEventListener("click", function (e) {
-    e.preventDefault();
-    const c = CONTACT;
-    const lines = [
-      "BEGIN:VCARD",
-      "VERSION:3.0",
-      "N:Greenhalgh;Xaviour;D;;",
-      "FN:" + c.name,
-      "TITLE:" + c.title,
-      "ORG:Vectorise",
-      "TEL;TYPE=CELL,VOICE:" + c.phone,
-      "EMAIL;TYPE=INTERNET:" + c.email,
-      "URL:" + c.linkedin,
-      "URL;TYPE=Telegram:https://t.me/" + c.telegram,
-      "URL;TYPE=WhatsApp:https://wa.me/" + c.whatsapp,
-      "URL;TYPE=Cal:" + c.cal.origin + "/" + c.cal.link,
-      "END:VCARD",
-      ""
-    ];
-    const blob = new Blob([lines.join("\r\n")], { type: "text/vcard;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "xaviour-greenhalgh.vcf";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
-  });
-</script>
 
 <script type="text/javascript">
   /* Cal embed — exact replication of the company-site pattern:
