@@ -91,13 +91,12 @@
     color: var(--muted);
   }
 
-  /* 1. Identity: the one dominant element. Editorial header, left-aligned. */
+  /* 1. Identity: the one dominant element. Avatar beside the name, kicker under it. */
   .identity { display: flex; flex-direction: column; gap: 14px; }
-  .identity .marks {
+  .identity .who {
     display: flex;
     align-items: center;
-    gap: 18px;
-    margin-bottom: 6px;
+    gap: 16px;
   }
   .avatar {
     width: 72px;
@@ -106,23 +105,38 @@
     border: 1px solid var(--border);
     object-fit: cover;
     display: block;
+    flex-shrink: 0;
     box-shadow: 0 0 0 1px var(--blue-20), 0 0 28px var(--blue-20);
   }
-  .compass { width: 28px; height: 28px; color: var(--fg); flex-shrink: 0; }
+  .identity .names {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    flex: 1;
+  }
   .identity h1 {
     margin: 0;
-    font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.25rem);
+    font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2rem);
     line-height: 1.05;
     letter-spacing: -0.025em;
     font-weight: 600;
     text-wrap: balance;
   }
+  .identity .kicker { white-space: nowrap; letter-spacing: 0.14em; }
+  .compass { width: 28px; height: 28px; color: var(--fg); flex-shrink: 0; align-self: flex-start; }
   .identity .line {
     margin: 0;
     font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
     line-height: 1.4;
     font-weight: 500;
     color: var(--fg);
+  }
+  @media (max-width: 419px) {
+    .compass { display: none; }
+  }
+  @media (max-width: 359px) {
+    .identity .kicker { font-size: 10px; letter-spacing: 0.12em; }
   }
 
   /* 2. Primary action */
@@ -267,9 +281,12 @@
 <main>
 
   <header class="identity">
-    <div class="marks">
+    <div class="who">
       <img class="avatar" src="xaviour.jpg" width="72" height="72" alt="Xaviour Greenhalgh">
-      <!-- The Vectorise compass mark: white, monochrome, never recoloured. -->
+      <div class="names">
+        <h1>Xaviour Greenhalgh</h1>
+        <p class="kicker">CTO &amp; Co-Founder &middot; Vectorise</p>
+      </div>
       <svg class="compass" viewBox="0 0 264 264" fill="none" aria-hidden="true">
         <g stroke="currentColor" stroke-width="12">
           <rect x="68.3604" y="132" width="90" height="90" transform="rotate(-45 68.3604 132)"/>
@@ -296,8 +313,6 @@
         </g>
       </svg>
     </div>
-    <p class="kicker">CTO &amp; Co-Founder &middot; Vectorise</p>
-    <h1>Xaviour Greenhalgh</h1>
     <p class="line">Software should scale boring 💤</p>
   </header>
 
