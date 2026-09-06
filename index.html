@@ -1,391 +1,404 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Xaviour D Greenhalgh — Contact</title>
-<meta name="description" content="Director @ Vectorise. Get in touch.">
-<meta name="theme-color" content="#000000">
+<title>Xaviour Greenhalgh</title>
+<meta name="description" content="CTO and co-founder of Vectorise. Links and contact.">
+<meta name="theme-color" content="#0a0f14">
+<meta property="og:title" content="Xaviour Greenhalgh">
+<meta property="og:description" content="Software should scale boring. CTO and co-founder of Vectorise.">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://xaviourg.github.io/xav-contact/">
+<meta property="og:image" content="https://xaviourg.github.io/xav-contact/xaviour.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@XaviourDG">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="preload" href="fonts/Geist-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/GeistMono-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  :root {
-    --bg: #000;
-    --fg: #fafafa;
-    --muted: #a4a4a4;
-    --muted-strong: #737373;
-    --card: #030303;
-    --card-hover: #060606;
-    --border: #161616;
-    --border-strong: #1f1f1f;
-    --ring: rgba(255, 255, 255, 0.6);
+  /* Fonts: Geist + Geist Mono, vendored (OFL). See fonts/SOURCE.md. */
+  @font-face { font-family: "Geist"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/Geist-Regular.woff2") format("woff2"); }
+  @font-face { font-family: "Geist"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonts/Geist-Medium.woff2") format("woff2"); }
+  @font-face { font-family: "Geist"; font-weight: 600; font-style: normal; font-display: swap; src: url("fonts/Geist-SemiBold.woff2") format("woff2"); }
+  @font-face { font-family: "Geist Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/GeistMono-Regular.woff2") format("woff2"); }
+  @font-face { font-family: "Geist Mono"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonts/GeistMono-Medium.woff2") format("woff2"); }
 
-    --radius: 0.625rem;
-    --radius-md: calc(var(--radius) - 2px);
-    --radius-xl: calc(var(--radius) + 4px);
-    --radius-2xl: 1rem;
+  /* Tokens: the Vectorise visual system (space-sales/visual/brand-identity.md). */
+  :root {
+    --bg: #0a0f14;
+    --card: #0f1419;
+    --fg: #fafafa;
+    --muted: #8b949e;
+    --border: #1f2730;
+    --blue: #60A5FA;
+    --blue-20: #60A5FA33;
+    --blue-10: #60A5FA1A;
+
+    --radius: 10px;
+    --radius-chip: 4px;
 
     --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-    --text-h1: clamp(2.25rem, 1.61rem + 2.74vw, 6rem);
-    --text-h2: clamp(1.875rem, 1.51rem + 1.56vw, 4rem);
-    --text-h3: clamp(1.5rem, 1.33rem + 0.73vw, 2.5rem);
-    --text-h4: clamp(1.25rem, 1.16rem + 0.37vw, 1.75rem);
-    --text-body: clamp(1rem, 0.98rem + 0.09vw, 1.125rem);
-    --text-body-lg: clamp(1rem, 0.96rem + 0.18vw, 1.25rem);
+    --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+    --gap: clamp(1.25rem, 4vw, 2rem);
+    color-scheme: dark;
   }
 
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+  html { overflow-x: clip; }
   body {
-    background: var(--bg);
+    margin: 0;
+    min-height: 100dvh;
+    padding: clamp(2rem, 6vw, 4rem) 16px clamp(2.5rem, 8vw, 5rem);
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg);
+    /* Faint 48px grid + a soft radial vignette. Texture only; the copy always wins. */
+    background-image:
+      radial-gradient(60rem 40rem at 50% -10%, rgba(255, 255, 255, 0.03), transparent 65%),
+      linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: auto, 48px 48px, 48px 48px;
     color: var(--fg);
     font-family: var(--sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    min-height: 100dvh;
-    padding: 28px 16px 56px;
-    display: flex;
-    justify-content: center;
-    background-image:
-      radial-gradient(800px 600px at 50% -10%, rgba(255, 255, 255, 0.04), transparent 60%),
-      radial-gradient(600px 500px at 100% 100%, rgba(255, 255, 255, 0.02), transparent 70%);
+    overflow-x: clip;
   }
+  img, svg { max-width: 100%; }
+  a { color: inherit; }
 
   main {
     width: 100%;
-    max-width: 480px;
+    max-width: 28rem;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--gap);
   }
 
-  /* Case-study card pattern: rounded-2xl, border, bg-card, slow border hover */
-  .card {
-    border: 1px solid var(--border);
-    background: var(--card);
-    border-radius: var(--radius-2xl);
-    padding: 24px;
-    transition: border-color 300ms ease, background-color 300ms ease;
-  }
-  @media (min-width: 480px) {
-    .card { padding: 32px; }
-  }
-
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted-strong);
-    margin: 0 0 12px;
-  }
-
-  /* Header card */
-  .header-card h1 {
+  /* The signature: mono micro-label. Quietest thing on the page. */
+  .kicker {
     margin: 0;
-    font-size: var(--text-h3);
-    line-height: 1.15;
-    letter-spacing: -0.015em;
-    font-weight: 700;
-  }
-  .header-card .tagline {
-    margin: 8px 0 0;
     font-family: var(--mono);
-    font-size: 13px;
-    color: var(--muted);
-  }
-  .header-card .actions { margin-top: 24px; }
-
-  .hint {
-    margin: 12px 0 0;
-    font-family: var(--mono);
-    font-size: 11px;
-    line-height: 1.5;
-    color: var(--muted-strong);
-    text-align: center;
-  }
-  .hint strong {
-    color: var(--muted);
     font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
+  /* 1. Identity: the one dominant element. Editorial header, left-aligned. */
+  .identity { display: flex; flex-direction: column; gap: 14px; }
+  .identity .marks {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 6px;
+  }
+  .avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 0 0 1px var(--blue-20), 0 0 28px var(--blue-20);
+  }
+  .compass { width: 28px; height: 28px; color: var(--fg); flex-shrink: 0; }
+  .identity h1 {
+    margin: 0;
+    font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+  .identity .line {
+    margin: 0;
+    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  /* 2. Primary action */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     width: 100%;
-    height: 52px;
-    border-radius: var(--radius-md);
+    height: 48px;
+    border-radius: var(--radius);
+    border: 1px solid var(--fg);
+    background: var(--fg);
+    color: var(--bg);
     font-family: var(--sans);
     font-size: 15px;
     font-weight: 600;
     letter-spacing: -0.005em;
     text-decoration: none;
     cursor: pointer;
-    transition: background-color 200ms ease, transform 100ms ease;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-    white-space: nowrap;
+    transition: box-shadow 200ms var(--ease-snap), transform 120ms var(--ease-snap);
   }
+  .btn:hover, .btn:focus-visible { box-shadow: 0 0 24px var(--blue-20); outline: none; }
   .btn:active { transform: scale(0.99); }
-  .btn-primary {
-    background: var(--fg);
-    color: var(--bg);
-    border: 1px solid var(--fg);
-  }
-  .btn-primary:hover { background: #fff; }
-  .btn .icon {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-  }
+  .btn .icon { width: 16px; height: 16px; flex-shrink: 0; }
 
-  /* Contact links card */
-  .links {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .row {
+  /* Sections */
+  .section { display: flex; flex-direction: column; gap: 10px; }
+
+  /* Shared surface for every link */
+  .tile {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 14px 16px;
+    background: var(--card);
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius);
     text-decoration: none;
     color: var(--fg);
-    transition: background-color 200ms ease, border-color 200ms ease;
     -webkit-tap-highlight-color: transparent;
+    transition: border-color 200ms var(--ease-snap), box-shadow 200ms var(--ease-snap);
   }
-  .row:hover {
-    background: var(--card-hover);
-    border-color: var(--border-strong);
+  .tile:hover, .tile:focus-visible {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 1px var(--blue-20), 0 0 24px var(--blue-20);
+    outline: none;
   }
-  .row .icon {
-    width: 16px;
-    height: 16px;
-    color: var(--muted);
-    flex-shrink: 0;
-  }
-  .row .label {
+  .tile .icon { flex-shrink: 0; }
+  .tile .label {
     font-family: var(--mono);
-    font-size: 12px;
-    color: var(--muted-strong);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    width: 70px;
-    flex-shrink: 0;
+    color: var(--muted);
   }
-  .row .value {
+  .tile .value {
     font-family: var(--mono);
     font-size: 13px;
-    flex: 1;
+    color: var(--fg);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    text-align: right;
-    color: var(--fg);
   }
 
-  /* Cal card */
-  .cal-card h2 {
-    margin: 0;
-    font-size: var(--text-h4);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
-  }
-  .cal-card .blurb {
-    margin: 10px 0 20px;
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--muted);
-  }
-  /* Slot dimensions and treatment mirror vectoriselabs.com exactly:
-     h-[850px] w-full overflow-hidden rounded-xl border border-border bg-card */
-  .cal-slot {
-    width: 100%;
-    height: 850px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    background: var(--card);
-  }
-  .cal-slot > * { width: 100%; height: 100%; }
+  /* 3. Highlights: full-width, the page's one blue accent lives in the icon */
+  .highlight { padding: 16px 18px; }
+  .highlight .icon { width: 22px; height: 22px; color: var(--blue); }
+  .highlight .text { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1; }
+  .highlight .value { font-size: 14px; }
+  .highlight .arrow { width: 16px; height: 16px; color: var(--muted); flex-shrink: 0; }
 
-  /* Share button */
-  .share-row {
-    display: flex;
-    justify-content: center;
-    margin-top: 8px;
+  /* 4. Everything else: a compact grid of chips */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
   }
+  @media (min-width: 480px) {
+    .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  .chip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px;
+    min-width: 0;
+  }
+  .chip .icon { width: 18px; height: 18px; color: var(--muted); }
+  .chip .text { display: flex; flex-direction: column; gap: 3px; min-width: 0; width: 100%; }
+  .chip .value { font-size: 12px; color: var(--muted); }
+
+  /* 5. Share */
+  .share-row { display: flex; justify-content: center; }
   .share-btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 8px;
-    padding: 10px 18px;
+    padding: 10px 16px;
     background: transparent;
     color: var(--muted);
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius);
     font-family: var(--mono);
     font-size: 11px;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.14em;
     cursor: pointer;
-    transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, transform 100ms ease;
     -webkit-tap-highlight-color: transparent;
+    transition: border-color 200ms var(--ease-snap), color 200ms var(--ease-snap), box-shadow 200ms var(--ease-snap);
   }
-  .share-btn:hover {
-    background: var(--card-hover);
-    border-color: var(--border-strong);
+  .share-btn:hover, .share-btn:focus-visible, .share-btn.flash {
     color: var(--fg);
+    border-color: var(--blue);
+    box-shadow: 0 0 0 1px var(--blue-20), 0 0 24px var(--blue-20);
+    outline: none;
   }
-  .share-btn:active { transform: scale(0.98); }
   .share-btn .icon { width: 13px; height: 13px; }
-  .share-btn.flash {
-    color: var(--fg);
-    border-color: var(--border-strong);
-  }
 
-  /* Footer */
+  /* 6. Footer */
   footer {
     text-align: center;
     font-family: var(--mono);
     font-size: 11px;
-    color: var(--muted-strong);
-    margin-top: 8px;
-    letter-spacing: 0.06em;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
-  footer a {
-    color: var(--muted-strong);
-    text-decoration: none;
-    transition: color 200ms ease;
-  }
-  footer a:hover { color: var(--fg); }
+  footer a { text-decoration: none; transition: color 200ms var(--ease-snap); }
+  footer a:hover, footer a:focus-visible { color: var(--fg); outline: none; }
 
-  @media (max-width: 380px) {
-    .row .label { width: 60px; }
-    .row .value { font-size: 12px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
   }
 </style>
 </head>
 <body>
 <main>
-  <script>
-    const CONTACT = {
-      name:     "Xaviour D Greenhalgh",
-      title:    "Director @ Vectorise",
-      phone:    "+61416612608",
-      phoneDisplay: "+61 416 612 608",
-      email:    "xaviour@vectoriselabs.com",
-      whatsapp: "61416612608",
-      telegram: "xaviourg",
-      linkedin: "https://linkedin.com/in/xaviourg",
-      cal: {
-        link:      "vectoriselabs",
-        namespace: "vectorise-trial",
-        origin:    "https://app.cal.eu",
-        embedJs:   "https://app.cal.eu/embed/embed.js"
-      }
-    };
-  </script>
 
-  <section class="card header-card">
-    <p class="eyebrow">Contact Card</p>
-    <h1>Xaviour D Greenhalgh</h1>
-    <p class="tagline">Director @ Vectorise | Smash your technical KPIs with embeded SRE/platform/data engineers</p>
-    <div class="actions">
-      <!-- On iOS 16+ a JS handler upgrades this to navigator.share() with the
-           vCard as a File, which triggers the native iOS share sheet and its
-           first-class "Save to Contacts" action — the only technique that
-           bypasses Safari's silent download of .vcf to Files. The anchor itself
-           is the fallback for browsers without the Web Share API File support
-           (desktop, older iOS, Android Firefox). -->
-      <a href="xaviour.vcf" type="text/vcard" id="add-contact-btn" class="btn btn-primary" aria-label="Add to contacts">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
-        Add Contact
-      </a>
+  <header class="identity">
+    <div class="marks">
+      <img class="avatar" src="xaviour.jpg" width="72" height="72" alt="Xaviour Greenhalgh">
+      <!-- The Vectorise compass mark: white, monochrome, never recoloured. -->
+      <svg class="compass" viewBox="0 0 264 264" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="12">
+          <rect x="68.3604" y="132" width="90" height="90" transform="rotate(-45 68.3604 132)"/>
+          <rect x="102.071" y="132" width="42.3259" height="42.3259" transform="rotate(-45 102.071 132)"/>
+          <circle cx="132" cy="20" r="15"/>
+          <circle cx="58" cy="57" r="15"/>
+          <circle cx="20" cy="132" r="15"/>
+          <circle cx="244" cy="132" r="15"/>
+          <circle cx="58" cy="207" r="15"/>
+          <circle cx="206" cy="207" r="15"/>
+          <circle cx="206" cy="57" r="15"/>
+          <circle cx="132" cy="244" r="15"/>
+        </g>
+        <g fill="currentColor">
+          <rect x="127" y="30" width="10" height="45"/>
+          <rect x="189" y="137" width="10" height="45" transform="rotate(-90 189 137)"/>
+          <rect x="30" y="137" width="10" height="45" transform="rotate(-90 30 137)"/>
+          <rect x="61" y="68.0711" width="10" height="55" transform="rotate(-45 61 68.0711)"/>
+          <rect x="157" y="164.071" width="10" height="55" transform="rotate(-45 157 164.071)"/>
+          <rect x="164.071" y="106.891" width="10" height="55" transform="rotate(-135 164.071 106.891)"/>
+          <rect x="68.0711" y="202.962" width="10" height="55" transform="rotate(-135 68.0711 202.962)"/>
+          <rect x="127" y="189" width="10" height="45"/>
+          <rect x="118" y="155.071" width="10" height="35.113" transform="rotate(-45 118 155.071)"/>
+        </g>
+      </svg>
     </div>
-  </section>
+    <p class="kicker">CTO &amp; Co-Founder &middot; Vectorise</p>
+    <h1>Xaviour Greenhalgh</h1>
+    <p class="line">Software should scale boring 💤</p>
+  </header>
 
-  <section class="card">
-    <p class="eyebrow">Lets Connect</p>
-    <div class="links">
-      <a class="row" href="https://linkedin.com/in/xaviourg" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+  <!-- On iOS 16+ a JS handler upgrades this to navigator.share() with the vCard
+       as a File, which opens the native share sheet with "Save to Contacts".
+       The anchor itself is the fallback everywhere else. -->
+  <a href="xaviour.vcf" type="text/vcard" id="add-contact-btn" class="btn" aria-label="Add to contacts">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+    Add contact
+  </a>
+
+  <section class="section" aria-labelledby="connect-kicker">
+    <p class="kicker" id="connect-kicker">Connect</p>
+    <a class="tile highlight" href="https://linkedin.com/in/xaviourg" target="_blank" rel="noopener">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      <span class="text">
         <span class="label">LinkedIn</span>
         <span class="value">in/xaviourg</span>
-      </a>
-      <a class="row" href="https://t.me/xaviourg" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-        <span class="label">Telegram</span>
-        <span class="value">@xaviourg</span>
-      </a>
-      <a class="row" href="https://wa.me/61416612608" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      </span>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+    </a>
+    <a class="tile highlight" href="https://wa.me/61416612608" target="_blank" rel="noopener">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      <span class="text">
         <span class="label">WhatsApp</span>
         <span class="value">+61 416 612 608</span>
-      </a>
-      <a class="row" href="mailto:xaviour@vectoriselabs.com">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
-        <span class="label">Email</span>
-        <span class="value">xaviour@vectoriselabs.com</span>
-      </a>
-      <a class="row" href="tel:+61416612608">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
-        <span class="label">Phone</span>
-        <span class="value">+61 416 612 608</span>
-      </a>
-      <a class="row" href="https://vectoriselabs.com" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <span class="label">Vectorise</span>
-        <span class="value">vectoriselabs.com</span>
-      </a>
-    </div>
+      </span>
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+    </a>
   </section>
 
-  <section class="card cal-card">
-    <p class="eyebrow">Book a Meeting</p>
-    <h2>20 minutes to see if we're a fit</h2>
-    <p class="blurb">No pitch deck. Just a conversation between engineers about your stack, your pain points, and whether there's a fit.</p>
-    <div id="cal-slot" class="cal-slot" aria-label="Cal.com booking"></div>
+  <section class="section" aria-labelledby="elsewhere-kicker">
+    <p class="kicker" id="elsewhere-kicker">Elsewhere</p>
+    <div class="grid">
+      <a class="tile chip" href="https://substack.com/@xaviourg" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16"/><path d="M4 9h16"/><path d="M4 14h16v6l-8-4-8 4z"/></svg>
+        <span class="text">
+          <span class="label">Substack</span>
+          <span class="value">@xaviourg</span>
+        </span>
+      </a>
+      <a class="tile chip" href="https://x.com/XaviourDG" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l16 16"/><path d="M20 4 4 20"/></svg>
+        <span class="text">
+          <span class="label">X</span>
+          <span class="value">@XaviourDG</span>
+        </span>
+      </a>
+      <a class="tile chip" href="https://t.me/xaviourg" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        <span class="text">
+          <span class="label">Telegram</span>
+          <span class="value">@xaviourg</span>
+        </span>
+      </a>
+      <a class="tile chip" href="mailto:xaviour@vectoriselabs.com">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+        <span class="text">
+          <span class="label">Email</span>
+          <span class="value">xaviour@vectoriselabs.com</span>
+        </span>
+      </a>
+      <a class="tile chip" href="tel:+61416612608">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="text">
+          <span class="label">Phone</span>
+          <span class="value">+61 416 612 608</span>
+        </span>
+      </a>
+      <a class="tile chip" href="https://vectoriselabs.com" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="text">
+          <span class="label">Vectorise</span>
+          <span class="value">vectoriselabs.com</span>
+        </span>
+      </a>
+    </div>
   </section>
 
   <div class="share-row">
     <button type="button" id="share-btn" class="share-btn" aria-label="Share this page">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/></svg>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/></svg>
       <span class="share-btn-label">Share this page</span>
     </button>
   </div>
 
   <footer>
-    <a href="https://vectoriselabs.com" target="_blank" rel="noopener">VECTORISELABS.COM</a>
+    <a href="https://vectoriselabs.com" target="_blank" rel="noopener">vectoriselabs.com</a>
   </footer>
 </main>
 
-<script type="text/javascript">
-  /* Share button — iOS gets the native share sheet, every other platform
-     copies the URL to the clipboard. iPadOS reports as Mac, so detect that
-     via touch-points as well as UA. */
+<script>
+  /* Share button: iOS gets the native share sheet, everything else copies the URL.
+     iPadOS reports as Mac, so touch points are checked as well as the UA. */
   (function () {
     const btn = document.getElementById("share-btn");
     if (!btn) return;
     const labelEl = btn.querySelector(".share-btn-label");
     const originalLabel = labelEl.textContent;
-
     const ua = navigator.userAgent;
-    const isIOS = /iPad|iPhone|iPod/.test(ua) ||
-                  (ua.includes("Mac") && navigator.maxTouchPoints > 1);
+    const isIOS = /iPad|iPhone|iPod/.test(ua) || (ua.includes("Mac") && navigator.maxTouchPoints > 1);
 
     function flash(text) {
       labelEl.textContent = text;
@@ -402,7 +415,6 @@
         await navigator.clipboard.writeText(url);
         flash("Link copied");
       } catch (err) {
-        // Older browsers without async clipboard — fall back to execCommand.
         const ta = document.createElement("textarea");
         ta.value = url;
         ta.style.position = "fixed";
@@ -422,10 +434,7 @@
     btn.addEventListener("click", async function () {
       if (isIOS && navigator.share) {
         try {
-          await navigator.share({
-            title: document.title,
-            url: window.location.href
-          });
+          await navigator.share({ title: document.title, url: window.location.href });
         } catch (err) {
           if (err && err.name !== "AbortError") copyURL();
         }
@@ -436,15 +445,11 @@
   })();
 </script>
 
-<script type="text/javascript">
-  /* Add Contact button — progressive enhancement for iOS.
-     iOS Safari (any version) silently saves .vcf links to Files and never shows
-     the Contacts preview. The Web Share API Level 2 (iOS 16+) is the only path
-     that surfaces a "Save to Contacts" action — calling navigator.share() with
-     the vCard as a File opens the native iOS share sheet, which lists Contacts
-     as a first-class target.
-     If the API isn't available (older iOS, most desktops) the anchor's default
-     href="xaviour.vcf" navigation runs unchanged. */
+<script>
+  /* Add contact: progressive enhancement for iOS. Safari silently saves .vcf links
+     to Files; navigator.share() with the vCard as a File (Web Share API Level 2,
+     iOS 16+) opens the share sheet with Contacts as a first-class target. Without
+     the API the anchor's default navigation to xaviour.vcf runs unchanged. */
   (function () {
     const btn = document.getElementById("add-contact-btn");
     if (!btn || !navigator.canShare) return;
@@ -453,11 +458,11 @@
       let file;
       try {
         const res = await fetch("xaviour.vcf");
-        if (!res.ok) return;  // fall back to native navigation
+        if (!res.ok) return;
         const blob = await res.blob();
         file = new File([blob], "xaviour.vcf", { type: "text/vcard" });
       } catch (err) {
-        return;  // fetch failed — fall back to native navigation
+        return;
       }
       if (!navigator.canShare({ files: [file] })) return;
 
@@ -465,91 +470,9 @@
       try {
         await navigator.share({ files: [file] });
       } catch (err) {
-        // User cancelled the share sheet, or share itself threw.
-        // AbortError = cancelled, do nothing. Other errors: fall back.
-        if (err && err.name !== "AbortError") {
-          window.location.href = "xaviour.vcf";
-        }
+        if (err && err.name !== "AbortError") window.location.href = "xaviour.vcf";
       }
     });
-  })();
-</script>
-
-<script type="text/javascript">
-  /* Cal embed — exact replication of the company-site pattern:
-     - origin app.cal.eu (NOT cal.com), namespace "vectorise-trial", calLink "vectoriselabs"
-     - lazy-initialised via IntersectionObserver so the iframe only loads when scrolled into view
-     - dark theme with matching cssVars */
-  (function () {
-    const NS = CONTACT.cal.namespace;
-    const CAL_LINK = CONTACT.cal.link;
-    const ORIGIN = CONTACT.cal.origin;
-    const EMBED_JS = CONTACT.cal.embedJs;
-
-    /* Standard Cal embed bootstrap */
-    (function (C, A, L) {
-      let p = function (a, ar) { a.q.push(ar); };
-      let d = C.document;
-      C.Cal = C.Cal || function () {
-        let cal = C.Cal;
-        let ar = arguments;
-        if (!cal.loaded) {
-          cal.ns = {};
-          cal.q = cal.q || [];
-          d.head.appendChild(d.createElement("script")).src = A;
-          cal.loaded = true;
-        }
-        if (ar[0] === L) {
-          const api = function () { p(api, arguments); };
-          const namespace = ar[1];
-          api.q = api.q || [];
-          if (typeof namespace === "string") {
-            cal.ns[namespace] = cal.ns[namespace] || api;
-            p(cal.ns[namespace], ar);
-            p(cal, ["initNamespace", namespace]);
-          } else { p(cal, ar); }
-          return;
-        }
-        p(cal, ar);
-      };
-    })(window, EMBED_JS, "init");
-
-    function initCal() {
-      Cal("init", NS, { origin: ORIGIN });
-      Cal.ns[NS]("inline", {
-        elementOrSelector: "#cal-slot",
-        calLink: CAL_LINK,
-        config: { layout: "month_view", theme: "dark" }
-      });
-      Cal.ns[NS]("ui", {
-        theme: "dark",
-        cssVarsPerTheme: {
-          dark: {
-            "cal-brand":         "#ffffff",
-            "cal-bg":            "#0d0d0d",
-            "cal-bg-emphasis":   "#1a1a1a",
-            "cal-bg-muted":      "#141414",
-            "cal-text":          "#fafafa",
-            "cal-text-emphasis": "#ffffff",
-            "cal-text-muted":    "#999999",
-            "cal-border":        "#262626",
-            "cal-border-subtle": "#1f1f1f"
-          }
-        },
-        hideEventTypeDetails: false,
-        layout: "month_view"
-      });
-    }
-
-    const slot = document.getElementById("cal-slot");
-    if ("IntersectionObserver" in window) {
-      const io = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) { io.disconnect(); initCal(); }
-      }, { rootMargin: "200px" });
-      io.observe(slot);
-    } else {
-      initCal();
-    }
   })();
 </script>
 </body>
