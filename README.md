@@ -22,7 +22,7 @@ The page follows the Vectorise visual system (`space-sales/visual/brand-identity
 `layout-patterns.md`): dark stage `#0a0f14`, card surface `#0f1419`, one accent blue `#60A5FA`,
 Geist for words, Geist Mono uppercase wide-tracked for every kicker and label, glows instead of
 shadows, no gradients, no bounce. One dominant element (the identity block), then the primary
-action, then two full-width highlights (LinkedIn, WhatsApp), then a compact grid for everything
+action, then two full-width highlights (LinkedIn, Vectorise), then a compact grid for everything
 else.
 
 ## Links
