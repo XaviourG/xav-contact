@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Xaviour Greenhalgh</title>
 <meta name="description" content="CTO and co-founder of Vectorise. Links and contact.">
-<meta name="theme-color" content="#0a0f14">
+<meta name="theme-color" content="#0d0d0d">
 <meta property="og:title" content="Xaviour Greenhalgh">
 <meta property="og:description" content="Software should scale boring. CTO and co-founder of Vectorise.">
 <meta property="og:type" content="profile">
@@ -14,37 +14,39 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@XaviourDG">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preload" href="fonts/Geist-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Anton-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Geist-Bold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/GeistMono-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  /* Fonts: Geist + Geist Mono, vendored (OFL). See fonts/SOURCE.md. */
+  /* Fonts: Anton, Geist and Geist Mono, vendored (OFL). See fonts/SOURCE.md. */
+  @font-face { font-family: "Anton"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/Anton-Regular.woff2") format("woff2"); }
   @font-face { font-family: "Geist"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/Geist-Regular.woff2") format("woff2"); }
   @font-face { font-family: "Geist"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonts/Geist-Medium.woff2") format("woff2"); }
   @font-face { font-family: "Geist"; font-weight: 600; font-style: normal; font-display: swap; src: url("fonts/Geist-SemiBold.woff2") format("woff2"); }
+  @font-face { font-family: "Geist"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Geist-Bold.woff2") format("woff2"); }
   @font-face { font-family: "Geist Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/GeistMono-Regular.woff2") format("woff2"); }
   @font-face { font-family: "Geist Mono"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonts/GeistMono-Medium.woff2") format("woff2"); }
 
-  /* Tokens: the Vectorise visual system (space-sales/visual/brand-identity.md). */
+  /* Tokens: the Vectorise design language (vectorise-labs-marketing-site/DESIGN.md). */
   :root {
-    --bg: #0a0f14;
-    --card: #0f1419;
+    --bg: #0d0d0d;
+    --panel: #050505;
     --fg: #fafafa;
-    --muted: #8b949e;
-    --border: #1f2730;
+    --grey: #999999;
+    --label: rgba(250, 250, 250, 0.6);
+    --rule: rgba(250, 250, 250, 0.18);
+    --rule-strong: rgba(250, 250, 250, 0.3);
     --blue: #60A5FA;
-    --blue-20: #60A5FA33;
-    --blue-10: #60A5FA1A;
+    --blue-10: rgba(96, 165, 250, 0.1);
+    --pale: #DBEAFE;
+    --orange: #F97316;
 
-    --radius: 10px;
-    --radius-chip: 4px;
-
+    --display: "Anton", "Arial Narrow", sans-serif;
     --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-    --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
-    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-
-    --gap: clamp(1.25rem, 4vw, 2rem);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --gap: clamp(1.75rem, 5vw, 2.5rem);
     color-scheme: dark;
   }
 
@@ -53,16 +55,10 @@
   body {
     margin: 0;
     min-height: 100dvh;
-    padding: clamp(2rem, 6vw, 4rem) 16px clamp(2.5rem, 8vw, 5rem);
+    padding: clamp(1.5rem, 5vw, 3.5rem) 16px clamp(2.5rem, 8vw, 5rem);
     display: flex;
     justify-content: center;
     background-color: var(--bg);
-    /* Faint 48px grid + a soft radial vignette. Texture only; the copy always wins. */
-    background-image:
-      radial-gradient(60rem 40rem at 50% -10%, rgba(255, 255, 255, 0.03), transparent 65%),
-      linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-    background-size: auto, 48px 48px, 48px 48px;
     color: var(--fg);
     font-family: var(--sans);
     -webkit-font-smoothing: antialiased;
@@ -80,197 +76,254 @@
     gap: var(--gap);
   }
 
-  /* The signature: mono micro-label. Quietest thing on the page. */
-  .kicker {
+  /* Mono micro label: small caps made of real words. */
+  .micro {
     margin: 0;
     font-family: var(--mono);
     font-weight: 500;
     font-size: 11px;
-    letter-spacing: 0.16em;
+    line-height: 1;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--label);
   }
 
-  /* 1. Identity: the one dominant element. Avatar beside the name, kicker under it. */
-  .identity { display: flex; flex-direction: column; gap: 14px; }
-  .identity .who {
+  /* Section marker: bar, label, hairline to the edge, a second word, the mark. */
+  .marker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+  }
+  .marker .bar { width: 28px; height: 8px; background: var(--blue); flex-shrink: 0; }
+  .marker .rule { flex: 1; height: 1px; background: var(--rule); min-width: 16px; }
+  .marker .mark { width: 12px; height: 12px; color: var(--label); flex-shrink: 0; }
+
+  /* Crop corners: four L marks on the one framed thing in a section. */
+  .crop { position: relative; }
+  .crop::before, .crop::after, .crop > .crop-b::before, .crop > .crop-b::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 0 solid var(--blue);
+    pointer-events: none;
+  }
+  .crop::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+  .crop::after { top: -1px; right: -1px; border-top-width: 1px; border-right-width: 1px; }
+  .crop > .crop-b::before { bottom: -1px; left: -1px; border-bottom-width: 1px; border-left-width: 1px; }
+  .crop > .crop-b::after { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
+
+  /* 1. Identity: the name is a mark, so it is set in the display face. */
+  .identity { display: flex; flex-direction: column; gap: 18px; }
+  .who { display: flex; align-items: flex-end; gap: 16px; }
+  .photo { width: 84px; height: 84px; flex-shrink: 0; padding: 5px; }
+  .photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+  }
+  .names { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding-bottom: 4px; }
+  .identity h1 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(2.25rem, 1.6rem + 3vw, 2.875rem);
+    line-height: 0.92;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+  }
+  .identity .line {
+    margin: 0;
+    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+  }
+  @media (max-width: 359px) {
+    .names .micro { font-size: 10px; letter-spacing: 0.14em; }
+  }
+
+  /* 2. The top action: flat, square, mono caps. */
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    height: 52px;
+    border: 1px solid var(--fg);
+    background: var(--fg);
+    color: #000;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 200ms var(--ease), border-color 200ms var(--ease);
+  }
+  .btn:hover, .btn:focus-visible { background: var(--blue); border-color: var(--blue); outline: none; }
+  .btn .icon { width: 16px; height: 16px; flex-shrink: 0; }
+  .btn .arrow { width: 14px; height: 14px; transition: transform 200ms var(--ease); }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  /* 3. The roadmap: the page's one framed object, the scaling roadmap in miniature. */
+  .roadmap {
+    display: flex;
+    flex-direction: column;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    text-decoration: none;
+    color: var(--fg);
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color 200ms var(--ease);
+  }
+  .roadmap:hover, .roadmap:focus-visible { border-color: var(--blue); outline: none; }
+  .roadmap .head { display: flex; flex-direction: column; gap: 14px; padding: 20px 20px 4px; }
+  .roadmap .tag { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .roadmap .tag .micro { display: inline-flex; align-items: center; gap: 8px; }
+  .roadmap .tag .sq { width: 7px; height: 7px; background: var(--blue); }
+  .roadmap .tag .free { color: var(--blue); }
+  .roadmap h2 {
+    margin: 0;
+    font-size: clamp(1.5rem, 1.25rem + 1.2vw, 1.875rem);
+    line-height: 1.04;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    max-width: 16ch;
+  }
+  .roadmap .sub { margin: 0; color: var(--grey); font-size: 14px; line-height: 1.45; }
+  .roadmap .viz { padding: 14px 12px 12px; }
+  .roadmap canvas { display: block; width: 100%; height: 150px; }
+  .roadmap .go {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    height: 52px;
+    padding: 0 20px;
+    background: var(--blue);
+    color: #000;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .roadmap .go .arrow { width: 16px; height: 16px; transition: transform 200ms var(--ease); }
+  .roadmap:hover .go .arrow, .roadmap:focus-visible .go .arrow { transform: translateX(4px); }
+
+  /* Sections */
+  .section { display: flex; flex-direction: column; gap: 14px; }
+
+  /* Rows: hairline divided, no boxes. */
+  .rows { border-top: 1px solid var(--rule); }
+  .row {
     display: flex;
     align-items: center;
     gap: 16px;
+    padding: 16px 4px;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+    color: var(--fg);
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 200ms var(--ease);
   }
-  .avatar {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    object-fit: cover;
-    display: block;
-    flex-shrink: 0;
-    box-shadow: 0 0 0 1px var(--blue-20), 0 0 28px var(--blue-20);
+  .row:hover, .row:focus-visible { background: var(--blue-10); outline: none; }
+  .row .icon { width: 20px; height: 20px; color: var(--blue); flex-shrink: 0; }
+  .row .text { display: flex; flex-direction: column; gap: 6px; min-width: 0; flex: 1; }
+  .row .value { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+  .row .arrow { width: 16px; height: 16px; color: var(--label); flex-shrink: 0; transition: color 200ms var(--ease), transform 200ms var(--ease); }
+  .row:hover .arrow, .row:focus-visible .arrow { color: var(--blue); transform: translate(2px, -2px); }
+  .row.download:hover .arrow, .row.download:focus-visible .arrow { transform: translateY(2px); }
+
+  /* Everything else: a hairline grid of cells. */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
   }
-  .identity .names {
+  @media (min-width: 480px) {
+    .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  .cell {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 12px;
+    padding: 14px;
     min-width: 0;
-    flex: 1;
-  }
-  .identity h1 {
-    margin: 0;
-    font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2rem);
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-    font-weight: 600;
-    text-wrap: balance;
-  }
-  .identity .kicker { white-space: nowrap; letter-spacing: 0.14em; }
-  .compass { width: 28px; height: 28px; color: var(--fg); flex-shrink: 0; align-self: flex-start; }
-  .identity .line {
-    margin: 0;
-    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
-    line-height: 1.4;
-    font-weight: 500;
-    color: var(--fg);
-  }
-  @media (max-width: 419px) {
-    .compass { display: none; }
-  }
-  @media (max-width: 359px) {
-    .identity .kicker { font-size: 10px; letter-spacing: 0.12em; }
-  }
-
-  /* 2. Primary action */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    height: 48px;
-    border-radius: var(--radius);
-    border: 1px solid var(--fg);
-    background: var(--fg);
-    color: var(--bg);
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -0.005em;
-    text-decoration: none;
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    transition: box-shadow 200ms var(--ease-snap), transform 120ms var(--ease-snap);
-  }
-  .btn:hover, .btn:focus-visible { box-shadow: 0 0 24px var(--blue-20); outline: none; }
-  .btn:active { transform: scale(0.99); }
-  .btn .icon { width: 16px; height: 16px; flex-shrink: 0; }
-
-  /* Sections */
-  .section { display: flex; flex-direction: column; gap: 10px; }
-
-  /* Shared surface for every link */
-  .tile {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+    background: var(--bg);
     text-decoration: none;
     color: var(--fg);
     -webkit-tap-highlight-color: transparent;
-    transition: border-color 200ms var(--ease-snap), box-shadow 200ms var(--ease-snap);
+    transition: background-color 200ms var(--ease);
   }
-  .tile:hover, .tile:focus-visible {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 1px var(--blue-20), 0 0 24px var(--blue-20);
-    outline: none;
-  }
-  .tile .icon { flex-shrink: 0; }
-  .tile .label {
-    font-family: var(--mono);
-    font-weight: 500;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .tile .value {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--fg);
+  .cell:hover, .cell:focus-visible { background: #111823; outline: none; }
+  .cell .icon { width: 18px; height: 18px; color: var(--fg); transition: color 200ms var(--ease); }
+  .cell:hover .icon, .cell:focus-visible .icon { color: var(--blue); }
+  .cell .text { display: flex; flex-direction: column; gap: 6px; min-width: 0; width: 100%; }
+  .cell .value {
+    font-size: 12px;
+    color: var(--grey);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  /* 3. Highlights: full-width, the page's one blue accent lives in the icon */
-  .highlight { padding: 16px 18px; }
-  .highlight .icon { width: 22px; height: 22px; color: var(--blue); }
-  .highlight .text { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1; }
-  .highlight .value { font-size: 14px; }
-  .highlight .arrow { width: 16px; height: 16px; color: var(--muted); flex-shrink: 0; }
-
-  /* 4. Everything else: a compact grid of chips */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-  @media (min-width: 480px) {
-    .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  }
-  .chip {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 14px;
-    min-width: 0;
-  }
-  .chip .icon { width: 18px; height: 18px; color: var(--muted); }
-  .chip .text { display: flex; flex-direction: column; gap: 3px; min-width: 0; width: 100%; }
-  .chip .value { font-size: 12px; color: var(--muted); }
-
-  /* 5. Share */
-  .share-row { display: flex; justify-content: center; }
+  /* 5. Share: a mono caps link with an underline. */
+  .share-row { display: flex; justify-content: flex-start; }
   .share-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background: transparent;
-    color: var(--muted);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
+    gap: 10px;
+    padding: 4px 0;
+    background: none;
+    border: 0;
+    color: var(--fg);
     font-family: var(--mono);
     font-size: 11px;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.2em;
+    text-decoration: underline;
+    text-decoration-color: var(--rule-strong);
+    text-underline-offset: 6px;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    transition: border-color 200ms var(--ease-snap), color 200ms var(--ease-snap), box-shadow 200ms var(--ease-snap);
+    transition: color 200ms var(--ease), text-decoration-color 200ms var(--ease);
   }
   .share-btn:hover, .share-btn:focus-visible, .share-btn.flash {
-    color: var(--fg);
-    border-color: var(--blue);
-    box-shadow: 0 0 0 1px var(--blue-20), 0 0 24px var(--blue-20);
+    color: var(--blue);
+    text-decoration-color: var(--blue);
     outline: none;
   }
   .share-btn .icon { width: 13px; height: 13px; }
 
   /* 6. Footer */
   footer {
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
   }
-  footer a { text-decoration: none; transition: color 200ms var(--ease-snap); }
-  footer a:hover, footer a:focus-visible { color: var(--fg); outline: none; }
+  footer .logo { width: 18px; height: 18px; color: var(--fg); }
+  footer a {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    transition: color 200ms var(--ease);
+  }
+  footer a:hover, footer a:focus-visible { color: var(--blue); outline: none; }
+  footer .micro { margin-left: auto; }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; }
@@ -278,114 +331,159 @@
 </style>
 </head>
 <body>
+<!-- The Vectorise mark, drawn once and reused as a registration mark. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="0 0 264 264">
+    <g fill="none" stroke="currentColor" stroke-width="14">
+      <rect x="68.3604" y="132" width="90" height="90" transform="rotate(-45 68.3604 132)"/>
+      <rect x="102.071" y="132" width="42.3259" height="42.3259" transform="rotate(-45 102.071 132)"/>
+      <circle cx="132" cy="20" r="15"/>
+      <circle cx="58" cy="57" r="15"/>
+      <circle cx="20" cy="132" r="15"/>
+      <circle cx="244" cy="132" r="15"/>
+      <circle cx="58" cy="207" r="15"/>
+      <circle cx="206" cy="207" r="15"/>
+      <circle cx="206" cy="57" r="15"/>
+      <circle cx="132" cy="244" r="15"/>
+    </g>
+    <g fill="currentColor">
+      <rect x="127" y="30" width="10" height="45"/>
+      <rect x="189" y="137" width="10" height="45" transform="rotate(-90 189 137)"/>
+      <rect x="30" y="137" width="10" height="45" transform="rotate(-90 30 137)"/>
+      <rect x="61" y="68.0711" width="10" height="55" transform="rotate(-45 61 68.0711)"/>
+      <rect x="157" y="164.071" width="10" height="55" transform="rotate(-45 157 164.071)"/>
+      <rect x="164.071" y="106.891" width="10" height="55" transform="rotate(-135 164.071 106.891)"/>
+      <rect x="68.0711" y="202.962" width="10" height="55" transform="rotate(-135 68.0711 202.962)"/>
+      <rect x="127" y="189" width="10" height="45"/>
+      <rect x="118" y="155.071" width="10" height="35.113" transform="rotate(-45 118 155.071)"/>
+    </g>
+  </symbol>
+</svg>
 <main>
 
   <header class="identity">
+    <p class="marker">
+      <span class="bar"></span>
+      <span class="micro">Contact</span>
+      <span class="rule"></span>
+      <span class="micro">Sydney</span>
+      <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
+    </p>
     <div class="who">
-      <img class="avatar" src="xaviour.jpg" width="72" height="72" alt="Xaviour Greenhalgh">
+      <div class="photo crop"><span class="crop-b"></span>
+        <img src="xaviour.jpg" width="74" height="74" alt="Xaviour Greenhalgh">
+      </div>
       <div class="names">
         <h1>Xaviour Greenhalgh</h1>
-        <p class="kicker">CTO &amp; Co-Founder &middot; Vectorise</p>
+        <p class="micro">CTO &amp; Co-Founder &middot; Vectorise</p>
       </div>
-      <svg class="compass" viewBox="0 0 264 264" fill="none" aria-hidden="true">
-        <g stroke="currentColor" stroke-width="12">
-          <rect x="68.3604" y="132" width="90" height="90" transform="rotate(-45 68.3604 132)"/>
-          <rect x="102.071" y="132" width="42.3259" height="42.3259" transform="rotate(-45 102.071 132)"/>
-          <circle cx="132" cy="20" r="15"/>
-          <circle cx="58" cy="57" r="15"/>
-          <circle cx="20" cy="132" r="15"/>
-          <circle cx="244" cy="132" r="15"/>
-          <circle cx="58" cy="207" r="15"/>
-          <circle cx="206" cy="207" r="15"/>
-          <circle cx="206" cy="57" r="15"/>
-          <circle cx="132" cy="244" r="15"/>
-        </g>
-        <g fill="currentColor">
-          <rect x="127" y="30" width="10" height="45"/>
-          <rect x="189" y="137" width="10" height="45" transform="rotate(-90 189 137)"/>
-          <rect x="30" y="137" width="10" height="45" transform="rotate(-90 30 137)"/>
-          <rect x="61" y="68.0711" width="10" height="55" transform="rotate(-45 61 68.0711)"/>
-          <rect x="157" y="164.071" width="10" height="55" transform="rotate(-45 157 164.071)"/>
-          <rect x="164.071" y="106.891" width="10" height="55" transform="rotate(-135 164.071 106.891)"/>
-          <rect x="68.0711" y="202.962" width="10" height="55" transform="rotate(-135 68.0711 202.962)"/>
-          <rect x="127" y="189" width="10" height="45"/>
-          <rect x="118" y="155.071" width="10" height="35.113" transform="rotate(-45 118 155.071)"/>
-        </g>
-      </svg>
     </div>
-    <p class="line">Software should scale boring 💤</p>
+    <p class="line">Software should scale boring.</p>
   </header>
 
-  <!-- On iOS 16+ a JS handler upgrades this to navigator.share() with the vCard
-       as a File, which opens the native share sheet with "Save to Contacts".
-       The anchor itself is the fallback everywhere else. -->
-  <a href="xaviour.vcf" type="text/vcard" id="add-contact-btn" class="btn" aria-label="Add to contacts">
-    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
-    Add contact
+  <a class="btn" href="https://linkedin.com/in/xaviourg" target="_blank" rel="noopener">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    Connect on LinkedIn
+    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
   </a>
 
-  <section class="section" aria-labelledby="connect-kicker">
-    <p class="kicker" id="connect-kicker">Connect</p>
-    <a class="tile highlight" href="https://linkedin.com/in/xaviourg" target="_blank" rel="noopener">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      <span class="text">
-        <span class="label">LinkedIn</span>
-        <span class="value">in/xaviourg</span>
+  <!-- The roadmap in miniature: changes flow left to right through seven areas
+       of engineering, bunch up at the bottlenecks, then flush once Vectorise
+       lifts them. Drawn by the script at the end; aria-hidden, the words say it. -->
+  <a class="roadmap crop" href="https://vectoriselabs.com/scaling-roadmap/?utm_source=xav-contact&amp;utm_medium=link&amp;utm_campaign=roi-roadmap" target="_blank" rel="noopener">
+    <span class="crop-b"></span>
+    <span class="head">
+      <span class="tag">
+        <span class="micro"><span class="sq"></span>Scaling roadmap</span>
+        <span class="micro free">Free</span>
       </span>
-      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
-    </a>
-    <a class="tile highlight" href="https://vectoriselabs.com" target="_blank" rel="noopener">
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      <span class="text">
-        <span class="label">Vectorise</span>
-        <span class="value">vectoriselabs.com</span>
-      </span>
-      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
-    </a>
+      <h2>Get your free engineering ROI roadmap.</h2>
+      <span class="sub">Eight questions place your team on nine stages across seven areas of engineering, and show what to fix next.</span>
+    </span>
+    <span class="viz"><canvas id="pipe" aria-hidden="true"></canvas></span>
+    <span class="go">
+      Find your bottleneck
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h16"/><path d="m13 5 7 7-7 7"/></svg>
+    </span>
+  </a>
+
+  <section class="section" aria-labelledby="connect-label">
+    <p class="marker">
+      <span class="bar"></span>
+      <span class="micro" id="connect-label">Connect</span>
+      <span class="rule"></span>
+      <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
+    </p>
+    <div class="rows">
+      <!-- On iOS 16+ a JS handler upgrades this to navigator.share() with the vCard
+           as a File, which opens the native share sheet with "Save to Contacts".
+           The anchor itself is the fallback everywhere else. -->
+      <a class="row download" href="xaviour.vcf" type="text/vcard" id="add-contact-btn" aria-label="Add to contacts">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+        <span class="text">
+          <span class="micro">Contact card</span>
+          <span class="value">Add contact</span>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </a>
+      <a class="row" href="https://vectoriselabs.com" target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#mark"/></svg>
+        <span class="text">
+          <span class="micro">Vectorise</span>
+          <span class="value">vectoriselabs.com</span>
+        </span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </a>
+    </div>
   </section>
 
-  <section class="section" aria-labelledby="elsewhere-kicker">
-    <p class="kicker" id="elsewhere-kicker">Elsewhere</p>
+  <section class="section" aria-labelledby="elsewhere-label">
+    <p class="marker">
+      <span class="bar"></span>
+      <span class="micro" id="elsewhere-label">Elsewhere</span>
+      <span class="rule"></span>
+      <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
+    </p>
     <div class="grid">
-      <a class="tile chip" href="https://substack.com/@xaviourg" target="_blank" rel="noopener">
+      <a class="cell" href="https://substack.com/@xaviourg" target="_blank" rel="noopener">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16"/><path d="M4 9h16"/><path d="M4 14h16v6l-8-4-8 4z"/></svg>
         <span class="text">
-          <span class="label">Substack</span>
+          <span class="micro">Substack</span>
           <span class="value">@xaviourg</span>
         </span>
       </a>
-      <a class="tile chip" href="https://x.com/XaviourDG" target="_blank" rel="noopener">
+      <a class="cell" href="https://x.com/XaviourDG" target="_blank" rel="noopener">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l16 16"/><path d="M20 4 4 20"/></svg>
         <span class="text">
-          <span class="label">X</span>
+          <span class="micro">X</span>
           <span class="value">@XaviourDG</span>
         </span>
       </a>
-      <a class="tile chip" href="https://t.me/xaviourg" target="_blank" rel="noopener">
+      <a class="cell" href="https://t.me/xaviourg" target="_blank" rel="noopener">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
         <span class="text">
-          <span class="label">Telegram</span>
+          <span class="micro">Telegram</span>
           <span class="value">@xaviourg</span>
         </span>
       </a>
-      <a class="tile chip" href="mailto:xaviour@vectoriselabs.com">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+      <a class="cell" href="mailto:xaviour@vectoriselabs.com">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16"/><path d="m22 7-10 5L2 7"/></svg>
         <span class="text">
-          <span class="label">Email</span>
+          <span class="micro">Email</span>
           <span class="value">xaviour@vectoriselabs.com</span>
         </span>
       </a>
-      <a class="tile chip" href="tel:+61416612608">
+      <a class="cell" href="tel:+61416612608">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
         <span class="text">
-          <span class="label">Phone</span>
+          <span class="micro">Phone</span>
           <span class="value">+61 416 612 608</span>
         </span>
       </a>
-      <a class="tile chip" href="https://wa.me/61416612608" target="_blank" rel="noopener">
+      <a class="cell" href="https://wa.me/61416612608" target="_blank" rel="noopener">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
         <span class="text">
-          <span class="label">WhatsApp</span>
+          <span class="micro">WhatsApp</span>
           <span class="value">+61 416 612 608</span>
         </span>
       </a>
@@ -400,9 +498,264 @@
   </div>
 
   <footer>
-    <a href="https://vectoriselabs.com" target="_blank" rel="noopener">vectoriselabs.com</a>
+    <svg class="logo" aria-hidden="true"><use href="#mark"/></svg>
+    <a href="https://vectoriselabs.com" target="_blank" rel="noopener">Vectorise</a>
+    <span class="micro">vectoriselabs.com</span>
   </footer>
 </main>
+
+<script>
+  /* The roadmap in miniature, after the bottleneck graphic on
+     vectoriselabs.com/scaling-roadmap. Seven columns (areas), nine rows
+     (stages). The pipe's floor steps down to each area's stage, so a lagging
+     area makes a shallow, slow neck where changes bunch up and some are lost.
+     Every few seconds Vectorise lifts the bottlenecks to the team's stage, the
+     flow speeds up and the queue flushes; then the bottlenecks move and it
+     runs again. Paused off screen; one still frame under reduced motion. */
+  (function () {
+    const canvas = document.getElementById("pipe");
+    if (!canvas || !canvas.getContext) return;
+    const ctx = canvas.getContext("2d");
+
+    const BLUE = "#60A5FA", PALE = "#DBEAFE", ORANGE = "#F97316", GREY = "#6B7280";
+    const COLS = 7, ROWS = 9, EXPECTED = 6;
+    const BOTTLENECK_MS = 5200, LIFT_MS = 900, FLUSH_MS = 3400;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let W = 0, H = 0, dpr = 1;
+    let cols = [];      // { level, from, to, tone }
+    let dots = [];      // { x, y, frac, colour, lost, fade, col }
+    let phase = "bottleneck", phaseAt = 0, spawnAcc = 0, last = 0;
+    let running = false, visible = true, raf = 0;
+
+    function hex(c) { return [1, 3, 5].map(function (i) { return parseInt(c.slice(i, i + 2), 16); }); }
+    function mix(a, b, t) {
+      const A = hex(a), B = hex(b);
+      return "#" + A.map(function (v, i) { return Math.round(v + (B[i] - v) * t).toString(16).padStart(2, "0"); }).join("");
+    }
+    function ease(t) { return 1 - Math.pow(1 - Math.min(1, Math.max(0, t)), 3); }
+
+    function layout() {
+      // Two bottlenecks a few stages behind, the rest at or a stage ahead.
+      const others = ["ahead", "ahead", "ahead", "level", "level"];
+      for (let i = others.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const t = others[i]; others[i] = others[j]; others[j] = t;
+      }
+      const a = 1 + Math.floor(Math.random() * 2);
+      const b = a + 2 + Math.floor(Math.random() * (COLS - a - 3));
+      const tones = [];
+      for (let c = 0, k = 0; c < COLS; c++) tones.push(c === a || c === b ? "critical" : others[k++]);
+      return tones.map(function (tone, c) {
+        const level = tone === "critical" ? 2 + Math.floor(Math.random() * 2) : tone === "ahead" ? EXPECTED + 1 : EXPECTED;
+        const prev = cols[c] ? cols[c].level : level;
+        return { tone: tone, level: level, from: prev, to: level, shown: tone };
+      });
+    }
+
+    function geom() {
+      const left = 20, right = W - 20, top = 8, bottom = H - 4;
+      const colW = (right - left) / COLS, rowH = (bottom - top) / ROWS;
+      return { left: left, right: right, top: top, colW: colW, rowH: rowH };
+    }
+    function floorY(g, level) { return g.top + level * g.rowH; }
+    function colAt(g, x) { return Math.max(0, Math.min(COLS - 1, Math.floor((x - g.left) / g.colW))); }
+    function toneColour(t) { return t === "critical" ? ORANGE : t === "ahead" ? PALE : BLUE; }
+
+    function resize() {
+      const r = canvas.getBoundingClientRect();
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      W = r.width; H = r.height;
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (!running) draw();
+    }
+
+    function speedOf(level) {
+      // A deep channel moves fast; a shallow neck squeezes and slows.
+      const flush = phase === "flush" ? 1.6 : 1;
+      return (18 + 60 * Math.pow(level / (EXPECTED + 1), 1.6)) * flush;
+    }
+
+    function step(dt, now) {
+      const g = geom();
+      const t = now - phaseAt;
+      if (phase === "bottleneck" && t > BOTTLENECK_MS) {
+        phase = "lift"; phaseAt = now;
+        cols.forEach(function (c) { c.from = c.level; c.to = c.tone === "critical" ? EXPECTED : c.level; });
+      } else if (phase === "lift") {
+        // Lifted one after another, left to right.
+        let order = 0;
+        cols.forEach(function (c) {
+          if (c.from === c.to) return;
+          const k = ease((t - order * 260) / LIFT_MS);
+          c.level = c.from + (c.to - c.from) * k;
+          if (k > 0.5) c.shown = "level";
+          order++;
+        });
+        if (t > LIFT_MS + 600) { phase = "flush"; phaseAt = now; }
+      } else if (phase === "flush" && t > FLUSH_MS) {
+        const next = layout();
+        cols.forEach(function (c, i) { c.from = c.level; c.tone = next[i].tone; c.to = next[i].level; });
+        phase = "reset"; phaseAt = now;
+      } else if (phase === "reset") {
+        const k = ease(t / LIFT_MS);
+        cols.forEach(function (c) { c.level = c.from + (c.to - c.from) * k; if (k > 0.5) c.shown = c.tone; });
+        if (k >= 1) { phase = "bottleneck"; phaseAt = now; }
+      }
+
+      // Spawn at the left opening.
+      spawnAcc += dt * (phase === "flush" ? 22 : 12);
+      while (spawnAcc >= 1 && dots.length < 120) {
+        spawnAcc -= 1;
+        dots.push({ x: g.left - 4, y: 0, frac: 0.12 + Math.random() * 0.76, colour: toneColour(cols[0].shown), lost: false, fade: 1, col: -1 });
+      }
+
+      for (let i = dots.length - 1; i >= 0; i--) {
+        const d = dots[i];
+        if (d.lost) {
+          d.fade -= dt;
+          d.colour = mix(d.colour, GREY, Math.min(1, dt * 6));
+          if (d.fade <= 0) dots.splice(i, 1);
+          continue;
+        }
+        const c = colAt(g, d.x), col = cols[c];
+        if (c !== d.col) {
+          d.col = c;
+          // Entering a bottleneck, 1 in 4 changes are lost.
+          if (col.shown === "critical" && Math.random() < 0.25 && d.x > g.left) { d.lost = true; continue; }
+        }
+        d.x += speedOf(col.level) * dt * (0.85 + d.frac * 0.3);
+        const floor = floorY(g, col.level) - 3, ceil = g.top + 3;
+        const target = ceil + d.frac * (floor - ceil);
+        d.y = d.y ? d.y + (target - d.y) * Math.min(1, dt * 10) : target;
+        d.colour = mix(d.colour, toneColour(col.shown), Math.min(1, dt * 5));
+        if (d.x > g.right + 6) dots.splice(i, 1);
+      }
+    }
+
+    function draw() {
+      const g = geom();
+      ctx.clearRect(0, 0, W, H);
+
+      // Empty stage cells under the pipe.
+      ctx.strokeStyle = "rgba(250,250,250,0.07)";
+      ctx.lineWidth = 1;
+      for (let c = 0; c < COLS; c++) {
+        for (let r = 0; r < ROWS; r++) {
+          ctx.strokeRect(Math.round(g.left + c * g.colW + 2) + 0.5, Math.round(g.top + r * g.rowH + 1.5) + 0.5, Math.round(g.colW - 4), Math.round(g.rowH - 3));
+        }
+      }
+
+      // Where the team should be: the team size's stage.
+      ctx.fillStyle = "rgba(96,165,250,0.1)";
+      ctx.fillRect(4, floorY(g, EXPECTED), W - 8, g.rowH);
+      ctx.fillStyle = BLUE;
+      ctx.fillRect(4, floorY(g, EXPECTED), 1.5, g.rowH);
+
+      // Each area's box at its stage, and BOTTLENECK under a shallow one.
+      cols.forEach(function (col, c) {
+        const x = g.left + c * g.colW;
+        const y = floorY(g, col.level);
+        ctx.fillStyle = toneColour(col.shown);
+        ctx.fillRect(x + 2, y + 2, g.colW - 4, Math.max(3, g.rowH * 0.55));
+        if (col.shown === "critical") {
+          const room = (g.top + ROWS * g.rowH) - (y + g.rowH);
+          const size = Math.min(g.colW * 0.62, 20);
+          if (room > size * 4) {
+            ctx.save();
+            ctx.translate(x + g.colW / 2 + size * 0.36, y + g.rowH + room / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.font = size + "px Anton, 'Arial Narrow', sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillStyle = ORANGE;
+            ctx.fillText("BOTTLENECK", 0, 0, room - 6);
+            ctx.restore();
+          }
+        }
+      });
+
+      // The pipe: a ceiling over the first row, a floor stepping to each stage.
+      ctx.beginPath();
+      ctx.moveTo(g.left, g.top);
+      ctx.lineTo(g.right, g.top);
+      ctx.moveTo(g.left, floorY(g, cols[0].level));
+      cols.forEach(function (col, c) {
+        const y = floorY(g, col.level);
+        ctx.lineTo(g.left + c * g.colW, y);
+        ctx.lineTo(g.left + (c + 1) * g.colW, y);
+      });
+      ctx.strokeStyle = "rgba(250,250,250,0.55)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // In and out chevrons.
+      ctx.fillStyle = phase === "flush" ? BLUE : "rgba(250,250,250,0.55)";
+      ctx.font = "500 10px 'Geist Mono', ui-monospace, monospace";
+      ctx.textAlign = "center";
+      const inY = (g.top + floorY(g, cols[0].level)) / 2 + 3;
+      const outY = (g.top + floorY(g, cols[COLS - 1].level)) / 2 + 3;
+      ctx.fillText("»", 10, inY);
+      ctx.fillText("»", W - 10, outY);
+
+      // The changes.
+      dots.forEach(function (d) {
+        ctx.globalAlpha = d.lost ? Math.max(0, d.fade) : 1;
+        ctx.fillStyle = d.colour;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, 2.1, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+    }
+
+    function frame(now) {
+      if (!running) return;
+      const dt = Math.min(0.05, (now - (last || now)) / 1000);
+      last = now;
+      step(dt, now);
+      draw();
+      raf = requestAnimationFrame(frame);
+    }
+    function start() {
+      if (running || reduced || !visible || document.hidden) return;
+      running = true; last = 0;
+      raf = requestAnimationFrame(frame);
+    }
+    function stop() { running = false; cancelAnimationFrame(raf); }
+
+    cols = layout();
+    resize();
+    if (reduced) {
+      // A still frame: changes spread along the pipe, bunched at the necks.
+      const g = geom();
+      for (let x = g.left; x < g.right; x += 0) {
+        const col = cols[colAt(g, x)];
+        const floor = floorY(g, col.level) - 3, ceil = g.top + 3;
+        const frac = 0.15 + Math.random() * 0.7;
+        dots.push({ x: x, y: ceil + frac * (floor - ceil), colour: toneColour(col.shown), lost: false, fade: 1 });
+        x += speedOf(col.level) / 12;
+      }
+      draw();
+    } else {
+      // Fill the pipe before the first frame, so it never opens empty.
+      phaseAt = performance.now();
+      for (let i = 0; i < 300; i++) step(1 / 60, phaseAt);
+      draw();
+    }
+
+    if ("ResizeObserver" in window) new ResizeObserver(resize).observe(canvas);
+    else window.addEventListener("resize", resize);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        visible ? start() : stop();
+      }).observe(canvas);
+    } else start();
+    document.addEventListener("visibilitychange", function () { document.hidden ? stop() : start(); });
+    start();
+  })();
+</script>
 
 <script>
   /* Share button: iOS gets the native share sheet, everything else copies the URL.

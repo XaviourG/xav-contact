@@ -8,22 +8,30 @@ Live: **https://xaviourg.github.io/xav-contact**
 ## What's in the box
 
 ```
-index.html     The whole site: HTML + inline CSS + two tiny inline scripts
+index.html     The whole site: HTML + inline CSS + three small inline scripts
 xaviour.vcf    Static vCard the "Add contact" button shares / downloads
 xaviour.jpg    Headshot (480px square)
 favicon.svg    The Vectorise compass mark on the dark stage
-fonts/         Geist + Geist Mono woff2, vendored (OFL). See fonts/SOURCE.md
+fonts/         Anton, Geist + Geist Mono woff2, vendored (OFL). See fonts/SOURCE.md
 .nojekyll      Tells GitHub Pages to serve files verbatim (no Jekyll)
 ```
 
 ## Design
 
-The page follows the Vectorise visual system (`space-sales/visual/brand-identity.md` and
-`layout-patterns.md`): dark stage `#0a0f14`, card surface `#0f1419`, one accent blue `#60A5FA`,
-Geist for words, Geist Mono uppercase wide-tracked for every kicker and label, glows instead of
-shadows, no gradients, no bounce. One dominant element (the identity block), then the primary
-action, then two full-width highlights (LinkedIn, Vectorise), then a compact grid for everything
-else.
+The page follows the Vectorise design language (`DESIGN.md` in
+`vectorise-labs/vectorise-labs-marketing-site`): black page `#0d0d0d`, square corners, hairline
+rules instead of boxes, Anton for the name, Geist bold for sentences, Geist Mono caps for every
+label, blue for the answer and orange only for the problem. Section markers (blue bar, label,
+hairline, the Vectorise mark) open each section.
+
+Order: identity, the LinkedIn button, the scaling roadmap panel, then Connect rows (Add contact,
+Vectorise) and the Elsewhere grid.
+
+The roadmap panel links to https://vectoriselabs.com/scaling-roadmap/ (tagged
+`utm_source=xav-contact`). Its canvas is a miniature of the site's bottleneck graphic: changes
+flow through seven areas, bunch up and are lost at two orange bottlenecks, then flush once the
+bottlenecks lift to the team's stage. It pauses off screen and draws one still frame under
+reduced motion.
 
 ## Links
 
@@ -42,7 +50,7 @@ else.
 
 Contact values live in **two** places. Keep them in sync:
 
-1. **`index.html`**: the link tiles in `<main>`. Each tile is an anchor with an inline SVG icon,
+1. **`index.html`**: the links in `<main>`. Each is an anchor with an inline SVG icon,
    a mono label and a value.
 2. **`xaviour.vcf`**: the file the "Add contact" button shares. Plain vCard 3.0 with CRLF line
    endings. After editing, re-CRLF it:
