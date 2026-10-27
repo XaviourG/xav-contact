@@ -29,7 +29,7 @@ Vectorise) and the Elsewhere grid.
 
 The roadmap panel links to https://vectoriselabs.com/scaling-roadmap/ (tagged
 `utm_source=xav-contact`). Its canvas is a miniature of the site's bottleneck graphic: changes
-flow through seven areas, bunch up and are lost at two orange bottlenecks, then flush once the
+flow through seven areas, bunch up and are lost at two orange bottlenecks (each named by its area, such as TESTING), then flush once the
 bottlenecks lift to the team's stage. It pauses off screen and draws one still frame under
 reduced motion.
 
