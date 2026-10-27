@@ -10,12 +10,8 @@ item1.URL:https://linkedin.com/in/xaviourg
 item1.X-ABLabel:LinkedIn
 item2.URL:https://wa.me/61416612608
 item2.X-ABLabel:WhatsApp
-item3.URL:https://t.me/xaviourg
-item3.X-ABLabel:Telegram
-item4.URL:https://substack.com/@xaviourg
-item4.X-ABLabel:Substack
-item5.URL:https://x.com/XaviourDG
-item5.X-ABLabel:X
-item6.URL:https://vectoriselabs.com
-item6.X-ABLabel:Vectorise
+item3.URL:https://x.com/XaviourDG
+item3.X-ABLabel:X
+item4.URL:https://vectoriselabs.com
+item4.X-ABLabel:Vectorise
 END:VCARD

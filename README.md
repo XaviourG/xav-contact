@@ -39,9 +39,7 @@ reduced motion.
 |---|---|
 | LinkedIn | https://linkedin.com/in/xaviourg |
 | WhatsApp | https://wa.me/61416612608 |
-| Substack | https://substack.com/@xaviourg |
 | X | https://x.com/XaviourDG |
-| Telegram | https://t.me/xaviourg |
 | Email | xaviour@vectoriselabs.com |
 | Phone | +61 416 612 608 |
 | Vectorise | https://vectoriselabs.com |
