@@ -248,6 +248,7 @@
     background: var(--rule);
     border: 1px solid var(--rule);
   }
+  .grid .wide { grid-column: span 2; }
   .cell {
     display: flex;
     flex-direction: column;
@@ -440,18 +441,18 @@
       <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
     </p>
     <div class="grid">
+      <a class="cell wide" href="mailto:xaviour@vectoriselabs.com">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16"/><path d="m22 7-10 5L2 7"/></svg>
+        <span class="text">
+          <span class="micro">Email</span>
+          <span class="value">xaviour@vectoriselabs.com</span>
+        </span>
+      </a>
       <a class="cell" href="https://x.com/XaviourDG" target="_blank" rel="noopener">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l16 16"/><path d="M20 4 4 20"/></svg>
         <span class="text">
           <span class="micro">X</span>
           <span class="value">@XaviourDG</span>
-        </span>
-      </a>
-      <a class="cell" href="mailto:xaviour@vectoriselabs.com">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16"/><path d="m22 7-10 5L2 7"/></svg>
-        <span class="text">
-          <span class="micro">Email</span>
-          <span class="value">xaviour@vectoriselabs.com</span>
         </span>
       </a>
       <a class="cell" href="tel:+61416612608">
@@ -466,6 +467,13 @@
         <span class="text">
           <span class="micro">WhatsApp</span>
           <span class="value">+61 416 612 608</span>
+        </span>
+      </a>
+      <a class="cell" href="https://developers.vectoriselabs.com/team-health" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span class="text">
+          <span class="micro">Team health</span>
+          <span class="value">Live dashboard</span>
         </span>
       </a>
     </div>

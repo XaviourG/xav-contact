@@ -42,6 +42,7 @@ reduced motion.
 | X | https://x.com/XaviourDG |
 | Email | xaviour@vectoriselabs.com |
 | Phone | +61 416 612 608 |
+| Team health | https://developers.vectoriselabs.com/team-health |
 | Vectorise | https://vectoriselabs.com |
 
 ## Edit your details
