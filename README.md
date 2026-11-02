@@ -3,7 +3,7 @@
 Xaviour's personal link and contact card. One static page, hosted free on GitHub Pages.
 No build step, no framework, no third-party requests.
 
-Live: **https://xaviourg.github.io/xav-contact**
+Live: **https://xav.contact**
 
 ## What's in the box
 
