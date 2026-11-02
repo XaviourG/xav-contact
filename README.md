@@ -10,11 +10,14 @@ Live: **https://xav.contact**
 ```
 index.html     The whole site: HTML + inline CSS + three small inline scripts
 xaviour.vcf    Static vCard the "Add contact" button shares / downloads
-xaviour-sydney.jpg  Hero photo (1400px wide, EXIF/GPS stripped)
+xaviour-sydney.jpg  Hero photo (1400x577, EXIF/GPS stripped)
 og.jpg         1200x630 link-preview image
 favicon.svg    X monogram on the dark stage
 fonts/         Anton, Geist + Geist Mono woff2, vendored (OFL). See fonts/SOURCE.md
 .nojekyll      Tells GitHub Pages to serve files verbatim (no Jekyll)
+robots.txt     Allows all crawlers, names the AI crawlers explicitly, points at the sitemap
+sitemap.xml    The page and llms.txt, with the hero image
+llms.txt       Plain-text profile for AI assistants (llmstxt.org format)
 ```
 
 ## Design
@@ -23,10 +26,22 @@ The page follows the Vectorise design language (`DESIGN.md` in
 `vectorise-labs/vectorise-labs-marketing-site`): black page `#0d0d0d`, square corners, hairline
 rules instead of boxes, Anton for the name, Geist bold for sentences, Geist Mono caps for every
 label, blue for the answer and orange only for the problem. Section markers (blue bar, label,
-hairline) open each section. The page is personal, so it carries no Vectorise logo or name.
+hairline) open each section. The page is personal: no Vectorise logo, with Vectorise named
+only in the title line under the name.
 
-Order: full-width photo and name, the LinkedIn button, the Connect grid (Add contact, email,
-phone, WhatsApp, Instagram, Facebook, X, team health), then the compact roadmap panel.
+Order: full-width photo, name and title line, the Connect grid (LinkedIn across the top, then
+Contact card, Blog, X, Instagram, WhatsApp, Facebook), the compact roadmap panel ("Work in
+software?"), the About bio with a fact list, and a footer with the Share button.
+
+## SEO and AI search
+
+- `<head>` carries the description, canonical URL, Open Graph and X card tags, `rel="me"` links
+  to each social profile, and a JSON-LD graph (`WebSite`, `ProfilePage`, `ImageObject`, `Person`).
+- The About section is the visible version of the same facts. Keep it, the JSON-LD `Person`
+  and `llms.txt` saying the same thing when any of them changes.
+- Phone and email are deliberately not in the page, JSON-LD or `llms.txt`; they live only in
+  `xaviour.vcf`.
+- Update `dateModified` in the JSON-LD and `lastmod` in `sitemap.xml` on meaningful changes.
 
 The roadmap panel links to https://vectoriselabs.com/scaling-roadmap/ (tagged
 `utm_source=xav-contact`). Its canvas is a miniature of the site's bottleneck graphic: changes
@@ -43,9 +58,9 @@ reduced motion.
 | X | https://x.com/XaviourDG |
 | Instagram | https://www.instagram.com/xaviour.greenhalgh/ |
 | Facebook | https://www.facebook.com/xaviour.greenhalgh.2025 |
-| Email | xaviour@vectoriselabs.com |
-| Phone | +61 416 612 608 |
-| Team health | https://developers.vectoriselabs.com/team-health |
+| Blog | https://vectoriselabs.com/blog/ |
+| Email (vCard only) | xaviour@vectoriselabs.com |
+| Phone (vCard only) | +61 416 612 608 |
 
 ## Edit your details
 

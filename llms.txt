@@ -1,0 +1,38 @@
+# Xaviour Greenhalgh
+
+> Xaviour Greenhalgh is a Sydney-based software engineer, CTO and co-founder. Xaviour works on release and reliability transformations for scaling software teams: site reliability engineering, platform engineering, testing, observability and putting AI into production safely. This site (xav.contact) is Xaviour's personal contact card.
+
+Xaviour's stated mission is to help 1,000 developers "ship more and break less" by the end of 2027. The focus is on fixing engineering foundations (tests, release pipelines, observability, gates and governance) rather than adding tools or headcount, and on finding the one or two bottlenecks that gate everything else in a team's software delivery.
+
+## Contact
+
+- [LinkedIn](https://www.linkedin.com/in/xaviourg/): the best way to connect professionally
+- [Contact card (vCard)](https://xav.contact/xaviour.vcf): name, phone, email and links in one file
+- [X / Twitter](https://x.com/XaviourDG): @XaviourDG
+- [Instagram](https://www.instagram.com/xaviour.greenhalgh/): @xaviour.greenhalgh
+- [Facebook](https://www.facebook.com/xaviour.greenhalgh.2025)
+- [GitHub](https://github.com/XaviourG): XaviourG
+
+## Current role
+
+- Co-Founder & CTO, [Vectorise](https://vectoriselabs.com/) (April 2026 to present, Sydney). Vectorise is an Australian onshore software engineering partner that embeds senior site reliability, platform and test engineers into client teams to speed up releases, strengthen reliability and put AI into production. Xaviour is one of three founding directors.
+
+## Experience
+
+- Senior Site Reliability Engineer, Macquarie Group (September 2025 to April 2026, Sydney): reliability and observability for enterprise-scale distributed systems, including metrics, tracing, SLOs and data engineering across high-throughput pipelines inside a major bank's change, audit and compliance controls.
+- Senior Software Engineer, Avertro (September 2023 to September 2025, Sydney): full-stack and DevOps engineering on a cybersecurity and governance, risk and compliance (GRC) platform.
+- Chief Executive Officer, and earlier CSM & Founding Engineer, Organelle (February 2023 to September 2023, Brisbane): B2B pathology supply chain startup; secured seed funding and built the data engine, scheduling services and marketing site.
+- Executive Vice President, SouthBank Toastmasters (July 2021 to June 2023, Brisbane): ran communication training sessions for groups of 20 to 40 people.
+
+## Education
+
+- The University of Queensland: Bachelor of Engineering (Honours) / Computer Science, Electrical and Electronics Engineering (2019 to 2022).
+
+## Areas of expertise
+
+Site reliability engineering, platform engineering, release engineering, CI/CD, observability, software testing, DevOps, developer experience, AI in the software delivery lifecycle, cloud infrastructure (AWS, Google Cloud), engineering leadership and public speaking.
+
+## Optional
+
+- [Free Software Scaling ROI Map](https://vectoriselabs.com/scaling-roadmap/): a 30-second assessment across AI, platform, testing, security, release, observability and data that identifies a team's highest-return engineering bottleneck.
+- [Blog](https://vectoriselabs.com/blog/): articles from Xaviour and the Vectorise team
