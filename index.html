@@ -4,14 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Xaviour Greenhalgh</title>
-<meta name="description" content="CTO and co-founder of Vectorise. Links and contact.">
+<meta name="description" content="Xaviour Greenhalgh. Links and contact.">
 <meta name="theme-color" content="#0d0d0d">
 <meta property="og:title" content="Xaviour Greenhalgh">
-<meta property="og:description" content="Ship more, break less. CTO and co-founder of Vectorise.">
+<meta property="og:description" content="Links and contact for Xaviour Greenhalgh, Sydney.">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://xav.contact/">
-<meta property="og:image" content="https://xav.contact/xaviour.jpg">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://xav.contact/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@XaviourDG">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/Anton-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -27,7 +29,7 @@
   @font-face { font-family: "Geist Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/GeistMono-Regular.woff2") format("woff2"); }
   @font-face { font-family: "Geist Mono"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonts/GeistMono-Medium.woff2") format("woff2"); }
 
-  /* Tokens: the Vectorise design language (vectorise-labs-marketing-site/DESIGN.md). */
+  /* Tokens */
   :root {
     --bg: #0d0d0d;
     --panel: #050505;
@@ -88,7 +90,7 @@
     color: var(--label);
   }
 
-  /* Section marker: bar, label, hairline to the edge, a second word, the mark. */
+  /* Section marker: bar, label, hairline to the edge. */
   .marker {
     display: flex;
     align-items: center;
@@ -97,7 +99,6 @@
   }
   .marker .bar { width: 28px; height: 8px; background: var(--blue); flex-shrink: 0; }
   .marker .rule { flex: 1; height: 1px; background: var(--rule); min-width: 16px; }
-  .marker .mark { width: 12px; height: 12px; color: var(--label); flex-shrink: 0; }
 
   /* Crop corners: four L marks on the one framed thing in a section. */
   .crop { position: relative; }
@@ -114,23 +115,27 @@
   .crop > .crop-b::before { bottom: -1px; left: -1px; border-bottom-width: 1px; border-left-width: 1px; }
   .crop > .crop-b::after { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
 
-  /* 1. Identity: the name is a mark, so it is set in the display face. */
+  /* 1. Identity: a full-width photo, then the name set in the display face. */
   .identity { display: flex; flex-direction: column; gap: 18px; }
-  .who { display: flex; align-items: flex-end; gap: 16px; }
-  .photo { width: 84px; height: 84px; flex-shrink: 0; padding: 5px; }
-  .photo img {
+  .hero { margin: 0; padding: 5px; }
+  .hero img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
+    aspect-ratio: 1400 / 787;
     object-fit: cover;
-    filter: grayscale(1) contrast(1.05);
   }
-  .names { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding-bottom: 4px; }
+  /* On a phone the photo runs to the screen edges and the top. */
+  @media (max-width: 480px) {
+    .hero { margin: -1.5rem -16px 0; padding: 0; }
+    .hero.crop::before, .hero.crop::after, .hero > .crop-b { display: none; }
+  }
+  .names { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
   .identity h1 {
     margin: 0;
     font-family: var(--display);
     font-weight: 400;
-    font-size: clamp(2.25rem, 1.6rem + 3vw, 2.875rem);
+    font-size: clamp(2.5rem, 1.8rem + 3.4vw, 3.25rem);
     line-height: 0.92;
     letter-spacing: 0.005em;
     text-transform: uppercase;
@@ -171,7 +176,7 @@
   .btn .arrow { width: 14px; height: 14px; transition: transform 200ms var(--ease); }
   .btn:hover .arrow { transform: translateX(3px); }
 
-  /* 3. The roadmap: the page's one framed object, the scaling roadmap in miniature. */
+  /* 3. The roadmap: a compact framed call to action at the foot of the page. */
   .roadmap {
     display: flex;
     flex-direction: column;
@@ -183,21 +188,17 @@
     transition: border-color 200ms var(--ease);
   }
   .roadmap:hover, .roadmap:focus-visible { border-color: var(--blue); outline: none; }
-  .roadmap .head { display: flex; flex-direction: column; gap: 14px; padding: 20px 20px 4px; }
-  .roadmap .tag { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .roadmap .tag .micro { display: inline-flex; align-items: center; gap: 8px; }
-  .roadmap .tag .sq { width: 7px; height: 7px; background: var(--blue); }
-  .roadmap .tag .free { color: var(--blue); }
+  .roadmap .head { padding: 18px 20px 0; }
   .roadmap h2 {
     margin: 0;
-    font-size: clamp(1.5rem, 1.25rem + 1.2vw, 1.875rem);
+    font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
     line-height: 1.04;
     font-weight: 700;
     letter-spacing: -0.04em;
-    max-width: 16ch;
+    max-width: 22ch;
   }
-  .roadmap .viz { padding: 14px 12px 12px; }
-  .roadmap canvas { display: block; width: 100%; height: 150px; }
+  .roadmap .viz { padding: 10px 12px 8px; }
+  .roadmap canvas { display: block; width: 100%; height: 76px; }
   .roadmap .go {
     display: flex;
     align-items: center;
@@ -219,28 +220,7 @@
   /* Sections */
   .section { display: flex; flex-direction: column; gap: 14px; }
 
-  /* Rows: hairline divided, no boxes. */
-  .rows { border-top: 1px solid var(--rule); }
-  .row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 4px;
-    border-bottom: 1px solid var(--rule);
-    text-decoration: none;
-    color: var(--fg);
-    -webkit-tap-highlight-color: transparent;
-    transition: background-color 200ms var(--ease);
-  }
-  .row:hover, .row:focus-visible { background: var(--blue-10); outline: none; }
-  .row .icon { width: 20px; height: 20px; color: var(--blue); flex-shrink: 0; }
-  .row .text { display: flex; flex-direction: column; gap: 6px; min-width: 0; flex: 1; }
-  .row .value { font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
-  .row .arrow { width: 16px; height: 16px; color: var(--label); flex-shrink: 0; transition: color 200ms var(--ease), transform 200ms var(--ease); }
-  .row:hover .arrow, .row:focus-visible .arrow { color: var(--blue); transform: translate(2px, -2px); }
-  .row.download:hover .arrow, .row.download:focus-visible .arrow { transform: translateY(2px); }
-
-  /* Everything else: a hairline grid of cells. */
+  /* Connections: a hairline grid of cells. */
   .grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -264,6 +244,8 @@
   .cell:hover, .cell:focus-visible { background: #111823; outline: none; }
   .cell .icon { width: 18px; height: 18px; color: var(--fg); transition: color 200ms var(--ease); }
   .cell:hover .icon, .cell:focus-visible .icon { color: var(--blue); }
+  .cell.accent .icon { color: var(--blue); }
+  .cell.accent .value { color: var(--fg); }
   .cell .text { display: flex; flex-direction: column; gap: 6px; min-width: 0; width: 100%; }
   .cell .value {
     font-size: 12px;
@@ -306,21 +288,11 @@
   footer {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 12px;
     padding-top: 18px;
     border-top: 1px solid var(--rule);
   }
-  footer .logo { width: 18px; height: 18px; color: var(--fg); }
-  footer a {
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    text-decoration: none;
-    transition: color 200ms var(--ease);
-  }
-  footer a:hover, footer a:focus-visible { color: var(--blue); outline: none; }
-  footer .micro { margin-left: auto; }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; }
@@ -328,52 +300,15 @@
 </style>
 </head>
 <body>
-<!-- The Vectorise mark, drawn once and reused as a registration mark. -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="mark" viewBox="0 0 264 264">
-    <g fill="none" stroke="currentColor" stroke-width="14">
-      <rect x="68.3604" y="132" width="90" height="90" transform="rotate(-45 68.3604 132)"/>
-      <rect x="102.071" y="132" width="42.3259" height="42.3259" transform="rotate(-45 102.071 132)"/>
-      <circle cx="132" cy="20" r="15"/>
-      <circle cx="58" cy="57" r="15"/>
-      <circle cx="20" cy="132" r="15"/>
-      <circle cx="244" cy="132" r="15"/>
-      <circle cx="58" cy="207" r="15"/>
-      <circle cx="206" cy="207" r="15"/>
-      <circle cx="206" cy="57" r="15"/>
-      <circle cx="132" cy="244" r="15"/>
-    </g>
-    <g fill="currentColor">
-      <rect x="127" y="30" width="10" height="45"/>
-      <rect x="189" y="137" width="10" height="45" transform="rotate(-90 189 137)"/>
-      <rect x="30" y="137" width="10" height="45" transform="rotate(-90 30 137)"/>
-      <rect x="61" y="68.0711" width="10" height="55" transform="rotate(-45 61 68.0711)"/>
-      <rect x="157" y="164.071" width="10" height="55" transform="rotate(-45 157 164.071)"/>
-      <rect x="164.071" y="106.891" width="10" height="55" transform="rotate(-135 164.071 106.891)"/>
-      <rect x="68.0711" y="202.962" width="10" height="55" transform="rotate(-135 68.0711 202.962)"/>
-      <rect x="127" y="189" width="10" height="45"/>
-      <rect x="118" y="155.071" width="10" height="35.113" transform="rotate(-45 118 155.071)"/>
-    </g>
-  </symbol>
-</svg>
 <main>
 
   <header class="identity">
-    <p class="marker">
-      <span class="bar"></span>
-      <span class="micro">Contact</span>
-      <span class="rule"></span>
-      <span class="micro">Sydney</span>
-      <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
-    </p>
-    <div class="who">
-      <div class="photo crop"><span class="crop-b"></span>
-        <img src="xaviour.jpg" width="74" height="74" alt="Xaviour Greenhalgh">
-      </div>
-      <div class="names">
-        <h1>Xaviour Greenhalgh</h1>
-        <p class="micro">CTO &amp; Co-Founder &middot; Vectorise</p>
-      </div>
+    <figure class="hero crop"><span class="crop-b"></span>
+      <img src="xaviour-sydney.jpg" width="1400" height="787" alt="Xaviour Greenhalgh in front of Sydney Harbour">
+    </figure>
+    <div class="names">
+      <h1>Xaviour Greenhalgh</h1>
+      <p class="micro">CTO &amp; Co-Founder &middot; Sydney</p>
     </div>
     <p class="line">Ship more, break less.</p>
   </header>
@@ -384,75 +319,28 @@
     <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
   </a>
 
-  <!-- The roadmap in miniature: changes flow left to right through seven areas
-       of engineering, bunch up at the bottlenecks, then flush once Vectorise
-       lifts them. Drawn by the script at the end; aria-hidden, the words say it. -->
-  <a class="roadmap crop" href="https://vectoriselabs.com/scaling-roadmap/?utm_source=xav-contact&amp;utm_medium=link&amp;utm_campaign=roi-roadmap" target="_blank" rel="noopener">
-    <span class="crop-b"></span>
-    <span class="head">
-      <span class="tag">
-        <span class="micro"><span class="sq"></span>Scaling roadmap</span>
-        <span class="micro free">Free</span>
-      </span>
-      <h2>Get your free engineering ROI roadmap.</h2>
-    </span>
-    <span class="viz"><canvas id="pipe" aria-hidden="true"></canvas></span>
-    <span class="go">
-      Find your bottleneck
-      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h16"/><path d="m13 5 7 7-7 7"/></svg>
-    </span>
-  </a>
-
   <section class="section" aria-labelledby="connect-label">
     <p class="marker">
       <span class="bar"></span>
       <span class="micro" id="connect-label">Connect</span>
       <span class="rule"></span>
-      <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
     </p>
-    <div class="rows">
+    <div class="grid">
       <!-- On iOS 16+ a JS handler upgrades this to navigator.share() with the vCard
            as a File, which opens the native share sheet with "Save to Contacts".
            The anchor itself is the fallback everywhere else. -->
-      <a class="row download" href="xaviour.vcf" type="text/vcard" id="add-contact-btn" aria-label="Add to contacts">
+      <a class="cell wide accent" href="xaviour.vcf" type="text/vcard" id="add-contact-btn">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
         <span class="text">
           <span class="micro">Contact card</span>
-          <span class="value">Add contact</span>
+          <span class="value">Add to contacts</span>
         </span>
-        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
       </a>
-      <a class="row" href="https://vectoriselabs.com" target="_blank" rel="noopener">
-        <svg class="icon" aria-hidden="true"><use href="#mark"/></svg>
-        <span class="text">
-          <span class="micro">Vectorise</span>
-          <span class="value">vectoriselabs.com</span>
-        </span>
-        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
-      </a>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="elsewhere-label">
-    <p class="marker">
-      <span class="bar"></span>
-      <span class="micro" id="elsewhere-label">Elsewhere</span>
-      <span class="rule"></span>
-      <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
-    </p>
-    <div class="grid">
       <a class="cell wide" href="mailto:xaviour@vectoriselabs.com">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16"/><path d="m22 7-10 5L2 7"/></svg>
         <span class="text">
           <span class="micro">Email</span>
           <span class="value">xaviour@vectoriselabs.com</span>
-        </span>
-      </a>
-      <a class="cell" href="https://x.com/XaviourDG" target="_blank" rel="noopener">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l16 16"/><path d="M20 4 4 20"/></svg>
-        <span class="text">
-          <span class="micro">X</span>
-          <span class="value">@XaviourDG</span>
         </span>
       </a>
       <a class="cell" href="tel:+61416612608">
@@ -469,6 +357,27 @@
           <span class="value">+61 416 612 608</span>
         </span>
       </a>
+      <a class="cell" href="https://www.instagram.com/xaviour.greenhalgh/" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+        <span class="text">
+          <span class="micro">Instagram</span>
+          <span class="value">@xaviour.greenhalgh</span>
+        </span>
+      </a>
+      <a class="cell" href="https://www.facebook.com/xaviour.greenhalgh.2025" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        <span class="text">
+          <span class="micro">Facebook</span>
+          <span class="value">xaviour.greenhalgh</span>
+        </span>
+      </a>
+      <a class="cell" href="https://x.com/XaviourDG" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l16 16"/><path d="M20 4 4 20"/></svg>
+        <span class="text">
+          <span class="micro">X</span>
+          <span class="value">@XaviourDG</span>
+        </span>
+      </a>
       <a class="cell" href="https://developers.vectoriselabs.com/team-health" target="_blank" rel="noopener">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         <span class="text">
@@ -479,6 +388,19 @@
     </div>
   </section>
 
+  <!-- The roadmap in miniature: changes flow left to right through seven areas
+       of engineering, bunch up at the bottlenecks, then flush once they are
+       lifted. Drawn by the script at the end; aria-hidden, the words say it. -->
+  <a class="roadmap crop" href="https://vectoriselabs.com/scaling-roadmap/?utm_source=xav-contact&amp;utm_medium=link&amp;utm_campaign=roi-roadmap" target="_blank" rel="noopener">
+    <span class="crop-b"></span>
+    <span class="head"><h2>Get your free engineering ROI roadmap.</h2></span>
+    <span class="viz"><canvas id="pipe" aria-hidden="true"></canvas></span>
+    <span class="go">
+      Find your bottleneck
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h16"/><path d="m13 5 7 7-7 7"/></svg>
+    </span>
+  </a>
+
   <div class="share-row">
     <button type="button" id="share-btn" class="share-btn" aria-label="Share this page">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/></svg>
@@ -487,18 +409,17 @@
   </div>
 
   <footer>
-    <svg class="logo" aria-hidden="true"><use href="#mark"/></svg>
-    <a href="https://vectoriselabs.com" target="_blank" rel="noopener">Vectorise</a>
-    <span class="micro">vectoriselabs.com</span>
+    <span class="micro">Xaviour Greenhalgh</span>
+    <span class="micro">xav.contact</span>
   </footer>
 </main>
 
 <script>
   /* The roadmap in miniature, after the bottleneck graphic on
-     vectoriselabs.com/scaling-roadmap. Seven columns (areas), nine rows
+     vectoriselabs.com/scaling-roadmap. Seven columns (areas), five rows
      (stages). The pipe's floor steps down to each area's stage, so a lagging
      area makes a shallow, slow neck where changes bunch up and some are lost.
-     Every few seconds Vectorise lifts the bottlenecks to the team's stage, the
+     Every few seconds the bottlenecks are lifted to the team's stage, the
      flow speeds up and the queue flushes; then the bottlenecks move and it
      runs again. Paused off screen; one still frame under reduced motion. */
   (function () {
@@ -507,7 +428,7 @@
     const ctx = canvas.getContext("2d");
 
     const BLUE = "#60A5FA", PALE = "#DBEAFE", ORANGE = "#F97316", GREY = "#6B7280";
-    const COLS = 7, ROWS = 9, EXPECTED = 6;
+    const COLS = 7, ROWS = 5, EXPECTED = 3;
     // The site's seven areas, in its column order.
     const AREAS = ["AI", "PLATFORM", "TESTING", "SECURITY", "RELEASE", "OBSERVABILITY", "DATA"];
     const BOTTLENECK_MS = 5200, LIFT_MS = 900, FLUSH_MS = 3400;
@@ -538,7 +459,7 @@
       const tones = [];
       for (let c = 0, k = 0; c < COLS; c++) tones.push(c === a || c === b ? "critical" : others[k++]);
       return tones.map(function (tone, c) {
-        const level = tone === "critical" ? 2 + Math.floor(Math.random() * 2) : tone === "ahead" ? EXPECTED + 1 : EXPECTED;
+        const level = tone === "critical" ? 1 : tone === "ahead" ? EXPECTED + 1 : EXPECTED;
         const prev = cols[c] ? cols[c].level : level;
         return { tone: tone, level: level, from: prev, to: level, shown: tone };
       });
