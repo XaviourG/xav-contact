@@ -8,7 +8,7 @@ Live: **https://xav.contact**
 ## What's in the box
 
 ```
-index.html     The whole site: HTML + inline CSS + three small inline scripts
+index.html     The whole site: HTML + inline CSS + four small inline scripts
 xaviour.vcf    Static vCard the "Add contact" button shares / downloads
 xaviour-sydney.jpg  Hero photo (1400x577, EXIF/GPS stripped)
 og.jpg         1200x630 link-preview image
@@ -26,12 +26,23 @@ The page follows the Vectorise design language (`DESIGN.md` in
 `vectorise-labs/vectorise-labs-marketing-site`): black page `#0d0d0d`, square corners, hairline
 rules instead of boxes, Anton for the name, Geist bold for sentences, Geist Mono caps for every
 label, blue for the answer and orange only for the problem. Section markers (blue bar, label,
-hairline) open each section. The page is personal: no Vectorise logo, with Vectorise named
-only in the title line under the name.
+hairline) open each section below the fold. The only Vectorise branding is the title line under
+the name and a large, faint Vectorise mark behind the first screen.
 
-Order: full-width photo, name and title line, the Connect grid (LinkedIn across the top, then
-Contact card, Blog, X, Instagram, WhatsApp, Facebook), the compact roadmap panel ("Work in
-software?"), the About bio with a fact list, and a footer with the Share button.
+The first screen (`.fold`) always fills the viewport (`100svh`) and holds three tiers: the photo,
+name and title line; the actions (LinkedIn as a single row, then the roadmap panel, "Work in
+software?") sitting low in thumb reach; and a grey "More" prompt under a hairline. Short screens
+(720px and 600px tall) tighten spacing and the roadmap drawing so the fold still fits one screen.
+
+The faint mark (`.mark-bg`) is a solid `#131313`, not an alpha colour, so overlapping strokes stay
+one tone. It is sized from the screen width (about 7.5% bleeds off each side on a phone), starts
+rotated 7deg, and on scroll moves at a quarter of the page's speed and turns to 45deg (the mark is
+eight-fold symmetric, so that is aligned again). `.fold-main` clips it at the hairline above "More".
+The effect is off under reduced motion.
+
+Below the fold, in order: Connect (Contact card, Blog, X, Instagram, WhatsApp, Facebook, then
+Let's talk as a full-width row to the Cal.com booking page), About with a fact list, the QR code
+under "Scan", and a footer with the Share button.
 
 ## SEO and AI search
 
@@ -59,6 +70,7 @@ reduced motion.
 | Instagram | https://www.instagram.com/xaviour.greenhalgh/ |
 | Facebook | https://www.facebook.com/xaviour.greenhalgh.2025 |
 | Blog | https://vectoriselabs.com/blog/ |
+| Let's talk (book a call) | https://cal.com/vectorise/intro |
 | Email (vCard only) | xaviour@vectoriselabs.com |
 | Phone (vCard only) | +61 416 612 608 |
 

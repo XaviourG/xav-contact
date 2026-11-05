@@ -64,7 +64,7 @@
       "primaryImageOfPage": {
         "@id": "https://xav.contact/#photo"
       },
-      "dateModified": "2026-11-03"
+      "dateModified": "2026-11-05"
     },
     {
       "@type": "ImageObject",
@@ -195,7 +195,7 @@
     --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
-    --gap: clamp(1.75rem, 5vw, 2.5rem);
+    --gap: clamp(2.5rem, 8vw, 3.5rem);
     color-scheme: dark;
   }
 
@@ -230,7 +230,7 @@
     margin: 0;
     font-family: var(--mono);
     font-weight: 500;
-    font-size: 11px;
+    font-size: 12.5px;
     line-height: 1;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -287,8 +287,109 @@
     letter-spacing: 0.005em;
     text-transform: uppercase;
   }
+  /* Phones: keep the title line on one line at the larger size. */
+  @media (max-width: 480px) {
+    .names .micro { letter-spacing: 0.1em; }
+  }
   @media (max-width: 359px) {
-    .names .micro { font-size: 10px; letter-spacing: 0.14em; }
+    .names .micro { font-size: 11px; letter-spacing: 0.06em; }
+  }
+
+  /* The fold: the first screen. Its height is the viewport less the body's top padding,
+     so the next section starts just below the screen edge. svh keeps it steady while
+     mobile browser bars show and hide. */
+  .fold {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - clamp(1.5rem, 5vw, 3.5rem));
+    min-height: calc(100svh - clamp(1.5rem, 5vw, 3.5rem));
+  }
+  /* Three tiers: who (identity), what next (actions), then the brand and More prompt.
+     The identity holds the top and the actions sit low (in thumb reach on a phone), with
+     the faint Vectorise mark filling the spare height between them. */
+  .fold-main {
+    flex: 1;
+    /* Clip the mark at the bottom of this block only (just above the More rule), so it
+       sinks behind that edge and never draws over the More prompt; sides and top stay
+       open for the bleed. */
+    clip-path: inset(-100vh -50vw 0 -50vw);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.75rem, 5vh, 3rem);
+    padding-bottom: clamp(1.75rem, 5vh, 3rem);
+  }
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  /* The spare height between identity and actions, textured with the Vectorise mark.
+     It grows to fill the screen and shrinks to nothing on short ones. */
+  .fold-mark {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+  }
+  /* Sized from the column width, not the gap, so it stays large; it runs behind the
+     cards (which are opaque) and shows only through the open space. */
+  .mark-bg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(115vw, 620px); /* phone: 7.5% of the screen off each side */
+    max-width: none;
+    height: auto;
+    aspect-ratio: 1;
+    transform: translate(-50%, calc(-50% + var(--parallax, 0px))) rotate(var(--spin, 7deg));
+    will-change: transform;
+    color: #131313; /* solid, not alpha: about 2.5% white on --bg, so overlapping strokes stay one tone */
+    pointer-events: none;
+  }
+  .identity, .actions { position: relative; z-index: 1; }
+  .fold-foot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .more {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--grey);
+    -webkit-tap-highlight-color: transparent;
+    transition: color 200ms var(--ease);
+  }
+  .more:hover, .more:focus-visible { color: var(--fg); outline: none; }
+  .more .chev { width: 14px; height: 14px; animation: nudge 2.4s var(--ease) infinite; }
+  @keyframes nudge {
+    0%, 60%, 100% { transform: translateY(0); opacity: 1; }
+    30% { transform: translateY(3px); opacity: 0.55; }
+  }
+  html { scroll-behavior: smooth; }
+  /* Short screens (iPhone SE and smaller): tighten the fold so it still fits one screen.
+     The brand and More prompt share a row, and the roadmap drawing gets shorter. */
+  @media (max-height: 720px) {
+    .fold-main { gap: 18px; padding-bottom: 18px; }
+    .identity { gap: 12px; }
+    .fold-foot { padding: 10px 0 4px; }
+    .roadmap .head { padding-top: 14px; }
+    .roadmap canvas { height: 56px; }
+  }
+  @media (max-height: 600px) {
+    .fold-main { gap: 14px; padding-bottom: 14px; }
+    .identity h1 { font-size: clamp(2.1rem, 1.6rem + 3vw, 2.6rem); }
+    .roadmap canvas { height: 38px; }
+    .roadmap .go { height: 44px; }
   }
 
   /* 2. The top action: flat, square, mono caps. */
@@ -303,7 +404,7 @@
     background: var(--fg);
     color: #000;
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 13.5px;
     font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -331,7 +432,7 @@
   .roadmap .head { padding: 18px 20px 0; }
   .roadmap h2 {
     margin: 0;
-    font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
+    font-size: clamp(1.45rem, 1.3rem + 0.8vw, 1.75rem);
     line-height: 1.04;
     font-weight: 700;
     letter-spacing: -0.04em;
@@ -349,14 +450,14 @@
     background: var(--blue);
     color: #000;
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 13.5px;
     font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
   }
   .roadmap .go { letter-spacing: 0.12em; white-space: nowrap; }
-  @media (max-width: 340px) { .roadmap .go { letter-spacing: 0.06em; padding: 0 14px; } }
-  .roadmap .go .arrow { width: 16px; height: 16px; transition: transform 200ms var(--ease); }
+  @media (max-width: 360px) { .roadmap .go { letter-spacing: 0.06em; padding: 0 14px; font-size: 12px; } }
+  .roadmap .go .arrow { flex-shrink: 0; width: 16px; height: 16px; transition: transform 200ms var(--ease); }
   .roadmap:hover .go .arrow, .roadmap:focus-visible .go .arrow { transform: translateX(4px); }
 
   /* Sections */
@@ -388,9 +489,18 @@
   .cell:hover .icon, .cell:focus-visible .icon { color: var(--blue); }
   .cell.accent .icon { color: var(--blue); }
   .cell.accent .value { color: var(--fg); }
+  /* Wide cells read as a single action row: icon, words, arrow. */
+  .cell.row { flex-direction: row; align-items: center; gap: 14px; padding: 16px; }
+  .cell.row .text { flex: 1; gap: 8px; }
+  .cell.row .value { font-size: 17px; }
+  @media (max-width: 400px) { .grid .cell:not(.row) .value { font-size: 13px; } }
+  .cell.row .icon { width: 22px; height: 22px; }
+  .cell .go-arrow { width: 16px; height: 16px; flex-shrink: 0; color: var(--grey); transition: transform 200ms var(--ease), color 200ms var(--ease); }
+  .cell:hover .go-arrow, .cell:focus-visible .go-arrow { color: var(--blue); transform: translateX(3px); }
+  .cell.accent .go-arrow { color: var(--fg); }
   .cell .text { display: flex; flex-direction: column; gap: 6px; min-width: 0; width: 100%; }
   .cell .value {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--grey);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -407,7 +517,7 @@
     border: 0;
     color: var(--fg);
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 12.5px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.2em;
@@ -423,20 +533,23 @@
     text-decoration-color: var(--blue);
     outline: none;
   }
-  .share-btn .icon { width: 13px; height: 13px; }
+  .share-btn .icon { width: 13px; height: 13px; flex-shrink: 0; }
+  .share-btn { white-space: nowrap; }
+  @media (max-width: 359px) {
+    footer .micro, .share-btn { letter-spacing: 0.1em; font-size: 11px; }
+  }
 
   /* About: the visible bio, so search engines and AI assistants read the same facts as the JSON-LD. */
-  .bio { margin-top: clamp(1.5rem, 6vw, 2.5rem); }
   .bio h2 {
     margin: 0;
-    font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
+    font-size: clamp(1.45rem, 1.3rem + 0.8vw, 1.75rem);
     line-height: 1.1;
     font-weight: 700;
     letter-spacing: -0.035em;
   }
   .bio p {
     margin: 0;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.6;
     color: rgba(250, 250, 250, 0.78);
     letter-spacing: -0.005em;
@@ -452,7 +565,7 @@
   }
   .facts dt, .facts dd { margin: 0; }
   .facts dt { padding-top: 3px; }
-  .facts dd { font-size: 14px; line-height: 1.45; color: var(--fg); }
+  .facts dd { font-size: 16px; line-height: 1.45; color: var(--fg); }
 
   /* Scan: the page's own QR code, full width, pinned above the footer. Light modules on the
      dark panel (phone cameras read inverted codes), blue pupils in the finders.
@@ -478,13 +591,18 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { transition: none !important; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    html { scroll-behavior: auto; }
   }
 </style>
 </head>
 <body>
 <main>
 
+  <!-- The fold: photo, name, LinkedIn and the roadmap fill the first screen, with a faint
+       Vectorise mark behind the spare space and a More prompt pinned to its foot. Everything else starts below it. -->
+  <div class="fold">
+  <div class="fold-main">
   <header class="identity">
     <figure class="hero crop"><span class="crop-b"></span>
       <img src="xaviour-sydney.jpg" width="1400" height="577" alt="Xaviour Greenhalgh in front of Sydney Harbour">
@@ -495,15 +613,51 @@
     </div>
   </header>
 
+  <!-- The Vectorise mark, large and faint, fills the space between who and what next. -->
+  <div class="fold-mark" aria-hidden="true"><svg class="mark-bg" viewBox="0 0 264 264" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid meet"><rect x="68.3604" y="132" width="90" height="90" transform="rotate(-45 68.3604 132)" stroke="currentColor" stroke-width="10"/><rect x="102.071" y="132" width="42.3259" height="42.3259" transform="rotate(-45 102.071 132)" stroke="currentColor" stroke-width="10"/><rect x="127" y="30" width="10" height="45" fill="currentColor"/><rect x="189" y="137" width="10" height="45" transform="rotate(-90 189 137)" fill="currentColor"/><rect x="30" y="137" width="10" height="45" transform="rotate(-90 30 137)" fill="currentColor"/><rect x="61" y="68.0711" width="10" height="55" transform="rotate(-45 61 68.0711)" fill="currentColor"/><rect x="157" y="164.071" width="10" height="55" transform="rotate(-45 157 164.071)" fill="currentColor"/><rect x="164.071" y="106.891" width="10" height="55" transform="rotate(-135 164.071 106.891)" fill="currentColor"/><rect x="68.0711" y="202.962" width="10" height="55" transform="rotate(-135 68.0711 202.962)" fill="currentColor"/><rect x="127" y="189" width="10" height="45" fill="currentColor"/><circle cx="132" cy="20" r="15" stroke="currentColor" stroke-width="10"/><circle cx="58" cy="57" r="15" stroke="currentColor" stroke-width="10"/><circle cx="20" cy="132" r="15" stroke="currentColor" stroke-width="10"/><circle cx="244" cy="132" r="15" stroke="currentColor" stroke-width="10"/><circle cx="58" cy="207" r="15" stroke="currentColor" stroke-width="10"/><circle cx="206" cy="207" r="15" stroke="currentColor" stroke-width="10"/><circle cx="206" cy="57" r="15" stroke="currentColor" stroke-width="10"/><circle cx="132" cy="244" r="15" stroke="currentColor" stroke-width="10"/><rect x="118" y="155.071" width="10" height="35.113" transform="rotate(-45 118 155.071)" fill="currentColor"/></svg></div>
+
+  <div class="actions">
   <section class="section" aria-label="Connect">
     <div class="grid">
-      <a class="cell wide accent" href="https://linkedin.com/in/xaviourg" target="_blank" rel="noopener">
+      <a class="cell wide row accent" href="https://linkedin.com/in/xaviourg" target="_blank" rel="noopener">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         <span class="text">
           <span class="micro">LinkedIn</span>
           <span class="value">Connect on LinkedIn</span>
         </span>
+        <svg class="go-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h16"/><path d="m13 5 7 7-7 7"/></svg>
       </a>
+    </div>
+  </section>
+
+  <!-- The roadmap in miniature: changes flow left to right through seven areas
+       of engineering, bunch up at the bottlenecks, then flush once they are
+       lifted. Drawn by the script at the end; aria-hidden, the words say it. -->
+  <a class="roadmap crop" href="https://vectoriselabs.com/scaling-roadmap/?utm_source=xav-contact&amp;utm_medium=link&amp;utm_campaign=roi-roadmap" target="_blank" rel="noopener">
+    <span class="crop-b"></span>
+    <span class="head"><h2>Work in software?</h2></span>
+    <span class="viz"><canvas id="pipe" aria-hidden="true"></canvas></span>
+    <span class="go">
+      Free Software Scaling ROI Map
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h16"/><path d="m13 5 7 7-7 7"/></svg>
+    </span>
+  </a>
+  </div>
+  </div>
+  <div class="fold-foot">
+    <a class="more" href="#more" aria-label="Scroll for more">
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg><span>More</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </a>
+  </div>
+  </div>
+
+  <section class="section" id="more" aria-label="More ways to connect">
+    <p class="marker">
+      <span class="bar"></span>
+      <span class="micro">Connect</span>
+      <span class="rule"></span>
+    </p>
+    <div class="grid">
       <!-- On iOS 16+ a JS handler upgrades this to navigator.share() with the vCard
            as a File, which opens the native share sheet with "Save to Contacts".
            The anchor itself is the fallback everywhere else. -->
@@ -549,21 +703,16 @@
           <span class="value">xaviour.greenhalgh</span>
         </span>
       </a>
+      <a class="cell wide row" href="https://cal.com/vectorise/intro" target="_blank" rel="noopener">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <span class="text">
+          <span class="micro">Let's talk</span>
+          <span class="value">Book an intro call</span>
+        </span>
+        <svg class="go-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h16"/><path d="m13 5 7 7-7 7"/></svg>
+      </a>
     </div>
   </section>
-
-  <!-- The roadmap in miniature: changes flow left to right through seven areas
-       of engineering, bunch up at the bottlenecks, then flush once they are
-       lifted. Drawn by the script at the end; aria-hidden, the words say it. -->
-  <a class="roadmap crop" href="https://vectoriselabs.com/scaling-roadmap/?utm_source=xav-contact&amp;utm_medium=link&amp;utm_campaign=roi-roadmap" target="_blank" rel="noopener">
-    <span class="crop-b"></span>
-    <span class="head"><h2>Work in software?</h2></span>
-    <span class="viz"><canvas id="pipe" aria-hidden="true"></canvas></span>
-    <span class="go">
-      Free Software Scaling ROI Map
-      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 12h16"/><path d="m13 5 7 7-7 7"/></svg>
-    </span>
-  </a>
 
   <section class="section bio" id="about" aria-labelledby="about-heading">
     <p class="marker">
@@ -585,6 +734,11 @@
   </section>
 
   <section class="section" aria-label="Scan to open this card">
+    <p class="marker">
+      <span class="bar"></span>
+      <span class="micro">Scan</span>
+      <span class="rule"></span>
+    </p>
     <div class="scan crop"><span class="crop-b"></span>
       <svg class="qr-code" viewBox="-4 -4 33 33" role="img" aria-labelledby="qr-title" shape-rendering="crispEdges"><title id="qr-title">QR code for xav.contact</title><path class="qr-data" d="M10.09 0.09h0.82v0.82h-0.82zM12.09 0.09h0.82v0.82h-0.82zM16.09 0.09h0.82v0.82h-0.82zM8.09 1.09h0.82v0.82h-0.82zM10.09 1.09h0.82v0.82h-0.82zM13.09 1.09h0.82v0.82h-0.82zM14.09 1.09h0.82v0.82h-0.82zM16.09 1.09h0.82v0.82h-0.82zM8.09 2.09h0.82v0.82h-0.82zM9.09 2.09h0.82v0.82h-0.82zM13.09 2.09h0.82v0.82h-0.82zM14.09 2.09h0.82v0.82h-0.82zM16.09 2.09h0.82v0.82h-0.82zM9.09 3.09h0.82v0.82h-0.82zM11.09 3.09h0.82v0.82h-0.82zM12.09 3.09h0.82v0.82h-0.82zM13.09 3.09h0.82v0.82h-0.82zM14.09 3.09h0.82v0.82h-0.82zM15.09 3.09h0.82v0.82h-0.82zM9.09 4.09h0.82v0.82h-0.82zM10.09 4.09h0.82v0.82h-0.82zM11.09 4.09h0.82v0.82h-0.82zM12.09 4.09h0.82v0.82h-0.82zM15.09 4.09h0.82v0.82h-0.82zM16.09 4.09h0.82v0.82h-0.82zM9.09 5.09h0.82v0.82h-0.82zM10.09 5.09h0.82v0.82h-0.82zM13.09 5.09h0.82v0.82h-0.82zM14.09 5.09h0.82v0.82h-0.82zM16.09 5.09h0.82v0.82h-0.82zM8.09 6.09h0.82v0.82h-0.82zM10.09 6.09h0.82v0.82h-0.82zM12.09 6.09h0.82v0.82h-0.82zM14.09 6.09h0.82v0.82h-0.82zM16.09 6.09h0.82v0.82h-0.82zM9.09 7.09h0.82v0.82h-0.82zM10.09 7.09h0.82v0.82h-0.82zM14.09 7.09h0.82v0.82h-0.82zM16.09 7.09h0.82v0.82h-0.82zM1.09 8.09h0.82v0.82h-0.82zM2.09 8.09h0.82v0.82h-0.82zM3.09 8.09h0.82v0.82h-0.82zM5.09 8.09h0.82v0.82h-0.82zM6.09 8.09h0.82v0.82h-0.82zM9.09 8.09h0.82v0.82h-0.82zM11.09 8.09h0.82v0.82h-0.82zM22.09 8.09h0.82v0.82h-0.82zM23.09 8.09h0.82v0.82h-0.82zM0.09 9.09h0.82v0.82h-0.82zM3.09 9.09h0.82v0.82h-0.82zM4.09 9.09h0.82v0.82h-0.82zM5.09 9.09h0.82v0.82h-0.82zM7.09 9.09h0.82v0.82h-0.82zM12.09 9.09h0.82v0.82h-0.82zM13.09 9.09h0.82v0.82h-0.82zM16.09 9.09h0.82v0.82h-0.82zM19.09 9.09h0.82v0.82h-0.82zM23.09 9.09h0.82v0.82h-0.82zM0.09 10.09h0.82v0.82h-0.82zM1.09 10.09h0.82v0.82h-0.82zM3.09 10.09h0.82v0.82h-0.82zM6.09 10.09h0.82v0.82h-0.82zM7.09 10.09h0.82v0.82h-0.82zM10.09 10.09h0.82v0.82h-0.82zM12.09 10.09h0.82v0.82h-0.82zM13.09 10.09h0.82v0.82h-0.82zM17.09 10.09h0.82v0.82h-0.82zM20.09 10.09h0.82v0.82h-0.82zM0.09 11.09h0.82v0.82h-0.82zM2.09 11.09h0.82v0.82h-0.82zM8.09 11.09h0.82v0.82h-0.82zM9.09 11.09h0.82v0.82h-0.82zM10.09 11.09h0.82v0.82h-0.82zM11.09 11.09h0.82v0.82h-0.82zM12.09 11.09h0.82v0.82h-0.82zM13.09 11.09h0.82v0.82h-0.82zM14.09 11.09h0.82v0.82h-0.82zM15.09 11.09h0.82v0.82h-0.82zM17.09 11.09h0.82v0.82h-0.82zM19.09 11.09h0.82v0.82h-0.82zM20.09 11.09h0.82v0.82h-0.82zM21.09 11.09h0.82v0.82h-0.82zM22.09 11.09h0.82v0.82h-0.82zM0.09 12.09h0.82v0.82h-0.82zM4.09 12.09h0.82v0.82h-0.82zM6.09 12.09h0.82v0.82h-0.82zM7.09 12.09h0.82v0.82h-0.82zM8.09 12.09h0.82v0.82h-0.82zM9.09 12.09h0.82v0.82h-0.82zM11.09 12.09h0.82v0.82h-0.82zM17.09 12.09h0.82v0.82h-0.82zM18.09 12.09h0.82v0.82h-0.82zM19.09 12.09h0.82v0.82h-0.82zM20.09 12.09h0.82v0.82h-0.82zM22.09 12.09h0.82v0.82h-0.82zM23.09 12.09h0.82v0.82h-0.82zM24.09 12.09h0.82v0.82h-0.82zM2.09 13.09h0.82v0.82h-0.82zM4.09 13.09h0.82v0.82h-0.82zM5.09 13.09h0.82v0.82h-0.82zM7.09 13.09h0.82v0.82h-0.82zM8.09 13.09h0.82v0.82h-0.82zM9.09 13.09h0.82v0.82h-0.82zM11.09 13.09h0.82v0.82h-0.82zM12.09 13.09h0.82v0.82h-0.82zM14.09 13.09h0.82v0.82h-0.82zM15.09 13.09h0.82v0.82h-0.82zM16.09 13.09h0.82v0.82h-0.82zM18.09 13.09h0.82v0.82h-0.82zM19.09 13.09h0.82v0.82h-0.82zM20.09 13.09h0.82v0.82h-0.82zM24.09 13.09h0.82v0.82h-0.82zM1.09 14.09h0.82v0.82h-0.82zM2.09 14.09h0.82v0.82h-0.82zM4.09 14.09h0.82v0.82h-0.82zM6.09 14.09h0.82v0.82h-0.82zM7.09 14.09h0.82v0.82h-0.82zM8.09 14.09h0.82v0.82h-0.82zM9.09 14.09h0.82v0.82h-0.82zM10.09 14.09h0.82v0.82h-0.82zM11.09 14.09h0.82v0.82h-0.82zM12.09 14.09h0.82v0.82h-0.82zM17.09 14.09h0.82v0.82h-0.82zM20.09 14.09h0.82v0.82h-0.82zM22.09 14.09h0.82v0.82h-0.82zM23.09 14.09h0.82v0.82h-0.82zM0.09 15.09h0.82v0.82h-0.82zM7.09 15.09h0.82v0.82h-0.82zM8.09 15.09h0.82v0.82h-0.82zM13.09 15.09h0.82v0.82h-0.82zM14.09 15.09h0.82v0.82h-0.82zM16.09 15.09h0.82v0.82h-0.82zM19.09 15.09h0.82v0.82h-0.82zM20.09 15.09h0.82v0.82h-0.82zM24.09 15.09h0.82v0.82h-0.82zM6.09 16.09h0.82v0.82h-0.82zM7.09 16.09h0.82v0.82h-0.82zM8.09 16.09h0.82v0.82h-0.82zM9.09 16.09h0.82v0.82h-0.82zM10.09 16.09h0.82v0.82h-0.82zM12.09 16.09h0.82v0.82h-0.82zM15.09 16.09h0.82v0.82h-0.82zM16.09 16.09h0.82v0.82h-0.82zM17.09 16.09h0.82v0.82h-0.82zM18.09 16.09h0.82v0.82h-0.82zM19.09 16.09h0.82v0.82h-0.82zM20.09 16.09h0.82v0.82h-0.82zM21.09 16.09h0.82v0.82h-0.82zM22.09 16.09h0.82v0.82h-0.82zM23.09 16.09h0.82v0.82h-0.82zM24.09 16.09h0.82v0.82h-0.82zM8.09 17.09h0.82v0.82h-0.82zM9.09 17.09h0.82v0.82h-0.82zM11.09 17.09h0.82v0.82h-0.82zM12.09 17.09h0.82v0.82h-0.82zM13.09 17.09h0.82v0.82h-0.82zM16.09 17.09h0.82v0.82h-0.82zM20.09 17.09h0.82v0.82h-0.82zM22.09 17.09h0.82v0.82h-0.82zM24.09 17.09h0.82v0.82h-0.82zM10.09 18.09h0.82v0.82h-0.82zM11.09 18.09h0.82v0.82h-0.82zM14.09 18.09h0.82v0.82h-0.82zM16.09 18.09h0.82v0.82h-0.82zM18.09 18.09h0.82v0.82h-0.82zM20.09 18.09h0.82v0.82h-0.82zM22.09 18.09h0.82v0.82h-0.82zM23.09 18.09h0.82v0.82h-0.82zM24.09 18.09h0.82v0.82h-0.82zM8.09 19.09h0.82v0.82h-0.82zM11.09 19.09h0.82v0.82h-0.82zM12.09 19.09h0.82v0.82h-0.82zM14.09 19.09h0.82v0.82h-0.82zM15.09 19.09h0.82v0.82h-0.82zM16.09 19.09h0.82v0.82h-0.82zM20.09 19.09h0.82v0.82h-0.82zM23.09 19.09h0.82v0.82h-0.82zM10.09 20.09h0.82v0.82h-0.82zM16.09 20.09h0.82v0.82h-0.82zM17.09 20.09h0.82v0.82h-0.82zM18.09 20.09h0.82v0.82h-0.82zM19.09 20.09h0.82v0.82h-0.82zM20.09 20.09h0.82v0.82h-0.82zM21.09 20.09h0.82v0.82h-0.82zM23.09 20.09h0.82v0.82h-0.82zM8.09 21.09h0.82v0.82h-0.82zM10.09 21.09h0.82v0.82h-0.82zM14.09 21.09h0.82v0.82h-0.82zM16.09 21.09h0.82v0.82h-0.82zM18.09 21.09h0.82v0.82h-0.82zM20.09 21.09h0.82v0.82h-0.82zM21.09 21.09h0.82v0.82h-0.82zM22.09 21.09h0.82v0.82h-0.82zM23.09 21.09h0.82v0.82h-0.82zM24.09 21.09h0.82v0.82h-0.82zM8.09 22.09h0.82v0.82h-0.82zM9.09 22.09h0.82v0.82h-0.82zM10.09 22.09h0.82v0.82h-0.82zM12.09 22.09h0.82v0.82h-0.82zM13.09 22.09h0.82v0.82h-0.82zM14.09 22.09h0.82v0.82h-0.82zM17.09 22.09h0.82v0.82h-0.82zM18.09 22.09h0.82v0.82h-0.82zM20.09 22.09h0.82v0.82h-0.82zM22.09 22.09h0.82v0.82h-0.82zM23.09 22.09h0.82v0.82h-0.82zM8.09 23.09h0.82v0.82h-0.82zM10.09 23.09h0.82v0.82h-0.82zM11.09 23.09h0.82v0.82h-0.82zM17.09 23.09h0.82v0.82h-0.82zM18.09 23.09h0.82v0.82h-0.82zM20.09 23.09h0.82v0.82h-0.82zM22.09 23.09h0.82v0.82h-0.82zM12.09 24.09h0.82v0.82h-0.82zM14.09 24.09h0.82v0.82h-0.82zM19.09 24.09h0.82v0.82h-0.82zM20.09 24.09h0.82v0.82h-0.82zM21.09 24.09h0.82v0.82h-0.82zM22.09 24.09h0.82v0.82h-0.82zM23.09 24.09h0.82v0.82h-0.82zM24.09 24.09h0.82v0.82h-0.82z"/><path class="qr-eye" d="M0 0h7v7h-7zM1 1v5h5v-5z" fill-rule="evenodd"/><rect class="qr-pupil" x="2" y="2" width="3" height="3"/><path class="qr-eye" d="M18 0h7v7h-7zM19 1v5h5v-5z" fill-rule="evenodd"/><rect class="qr-pupil" x="20" y="2" width="3" height="3"/><path class="qr-eye" d="M0 18h7v7h-7zM1 19v5h5v-5z" fill-rule="evenodd"/><rect class="qr-pupil" x="2" y="20" width="3" height="3"/></svg>
     </div>
@@ -854,6 +1008,32 @@
     } else start();
     document.addEventListener("visibilitychange", function () { document.hidden ? stop() : start(); });
     start();
+  })();
+</script>
+
+<script>
+  /* Parallax: the background mark moves at a quarter of the page's speed, so it lags behind
+     and sinks under the edge above the More prompt, turning 38deg back into alignment. One transform per frame, only while the fold is on
+     screen; skipped under reduced motion. */
+  (function () {
+    const mark = document.querySelector(".mark-bg");
+    const fold = document.querySelector(".fold");
+    if (!mark || !fold || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const RATE = 0.75; /* the mark moves a quarter as fast as the page */
+    let ticking = false;
+    function update() {
+      ticking = false;
+      const h = fold.offsetHeight;
+      const y = Math.min(window.scrollY, h);
+      mark.style.setProperty("--parallax", (y * RATE).toFixed(1) + "px");
+      /* Turns from 7deg to 45deg across the fold; the mark is eight-fold symmetric, so at
+         45deg it is square again by the time the fold has scrolled away. */
+      mark.style.setProperty("--spin", (7 + 38 * (h ? y / h : 0)).toFixed(2) + "deg");
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
   })();
 </script>
 
